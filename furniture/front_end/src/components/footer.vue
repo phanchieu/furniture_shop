@@ -49,7 +49,9 @@
                 <div class="about col-5 col-lg-6">
                   <h6>THÔNG TIN</h6>
                   <ul class="menu">
-                    <li class="list"><router-link to="/Home">Trang chủ</router-link></li>
+                    <li class="list">
+                      <router-link to="/">Trang chủ</router-link>
+                    </li>
                     <li class="list"><a href="#">Giới thiệu</a></li>
                     <li class="list"><a href="#">Sản phẩm</a></li>
                     <li class="list"><a href="#">Tin tức</a></li>
@@ -100,7 +102,7 @@
     <div class="end">
       <span>phanchieudev@gmail.com</span>
     </div>
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
@@ -165,8 +167,8 @@ li {
   font-size: 13px;
   line-height: 35px;
   color: #919191;
+  display: inline-block;
   width: 100%;
-  padding-right: 30px !important;
   transition: all 0.2s ease-in-out !important;
 }
 .address-all a:hover {
@@ -189,9 +191,9 @@ li {
 .list a {
   color: #919191;
   font-size: 13px;
-  padding: 5px 30% 5px 5px;
   transition: all ease 0.3s;
   width: 100%;
+  display: inline-block;
 }
 .list:last-child {
   margin-bottom: 20px;
@@ -248,11 +250,6 @@ li {
   }
   .link {
     height: 120px;
-  }
-}
-@media only screen and (max-width: 280px) {
-  .list a {
-    padding: 0;
   }
 }
 </style>
