@@ -11,6 +11,7 @@
    <CarouselReviews/>
     <News/>
     <Marketer/>
+    <Footer/>
     </div>
  </div>
 </template>
@@ -26,6 +27,7 @@
   import CarouselReviews from './carousel_reviews.vue'
   import News from './news.vue'
   import Marketer from './marketer.vue'
+  import Footer from '../../components/footer.vue'
 
   export default {
     name: 'Home',
@@ -40,6 +42,7 @@
       CarouselReviews,
       News,
       Marketer,
+      Footer
     },
     // props:['active_category'],
   }

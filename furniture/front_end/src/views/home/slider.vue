@@ -31,24 +31,15 @@ export default {
 </script>
 
 <style scoped>
-.carousel {
-  height: 80vh;
+.img{
+  display: block;
   width: 100%;
+  height: 80vh;
+  overflow: hidden;
 }
 .img img {
   max-width: 100%;
-  height: 80vh;
-}
-@media only screen and (max-width: 800px) {
-  .carousel {
-  width: 100%;
-  height: 50vh;
-
-}
-.img img {
-  width: 150%;
-  height: 50vh;
-  
-}
+  height: 100%;
+  object-fit: cover !important;
 }
 </style>

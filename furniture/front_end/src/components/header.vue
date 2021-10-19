@@ -1,237 +1,255 @@
 <template>
-<div>
-  <div id="header">
-    <div class="container-fluid header-top">
-      <div class="container">
-        <div class="row">
-          <div class="address col-7">
-            <span
-              ><strong
-                ><b-icon class="icon-house" icon="house-door-fill"></b-icon
-              ></strong>
-              Tầng 3, Hà Thành Plaza, 102 Thái Thịnh, Trung Liệt, Đống Đa, Hà
-              Nội</span
-            >
-            <div class="phone">
-              <b-icon class="icon-headphones" icon="headphones"></b-icon>
-              <a href="tel:0355322912"><strong>0355322912</strong></a>
+  <div>
+    <div id="header">
+      <div class="container-fluid header-top">
+        <div class="container">
+          <div class="row">
+            <div class="address col-7">
+              <span
+                ><strong
+                  ><b-icon class="icon-house" icon="house-door-fill"></b-icon
+                ></strong>
+                Tầng 3, Hà Thành Plaza, 102 Thái Thịnh, Trung Liệt, Đống Đa, Hà
+                Nội</span
+              >
+              <div class="phone">
+                <b-icon class="icon-headphones" icon="headphones"></b-icon>
+                <a href="tel:0355322912"><strong>0355322912</strong></a>
+              </div>
             </div>
-          </div>
-          <div class="freeship col-5">
-            <p>
-              Miễn phí vận chuyển với đơn hàng trên 500.000đ
-              <b-icon class="icon-truck" icon="truck"></b-icon>
-            </p>
+            <div class="freeship col-5">
+              <p>
+                Miễn phí vận chuyển với đơn hàng trên 500.000đ
+                <b-icon class="icon-truck" icon="truck"></b-icon>
+              </p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="header-main container-fluid">
-      <div class="container">
-        <b-row>
-          <div
-            class="menu-mobile col-2 col-sm-2 col-md-2 "
-            @click="show = !show"
-            v-if="show == true" style="z-index:0;"
-          >
-            <b-icon class="icon-list" icon="list" > </b-icon>
-          </div>
-          <div
-            class="menu-mobile col-2 col-sm-2 col-md-2 "
-            @click="show = !show"
-            v-else
-          >
-            <b-icon class="icon-list" icon="list" > </b-icon>
-          </div>
-          <div class="col-8 col-sm-8 col-md-8 col-lg-3">
-            <div class="logo">
-              <a href="/Home"><img src="../assets/logo.png" alt=""/></a>
+      <div class="header-main container-fluid">
+        <div class="container">
+          <b-row>
+            <div
+              class="menu-mobile col-2 col-sm-2 col-md-2 "
+              @click="show = !show"
+              v-if="show == true"
+              style="z-index:0;"
+            >
+              <b-icon class="icon-list" icon="list"> </b-icon>
             </div>
-          </div>
-          <div class="col-12 col-sm-12 col-md-12 col-lg-4">
-            <div id="search">
-              <div class="search">
-                <input
-                  type="text"
-                  class="input-search"
-                  placeholder="Nhập từ khóa cần tìm..."
-                />
-                <button class="search-button">
-                  <b-icon class="icon-search" icon="search"> </b-icon>
-                </button>
-              </div>
-              <div class="cart-mobile">
-                <a href="#"
-                  ><b-icon class="icon-cart" icon="cart-check-fill"> </b-icon
-                  ><strong class="cart_product_number"> 1 </strong></a
-                >
+            <div
+              class="menu-mobile col-2 col-sm-2 col-md-2 "
+              @click="show = !show"
+              v-else
+            >
+              <b-icon class="icon-list" icon="list"> </b-icon>
+            </div>
+            <div class="col-8 col-sm-8 col-md-8 col-lg-3">
+              <div class="logo">
+                <a href="/"><img src="../assets/logo.png" alt=""/></a>
               </div>
             </div>
-          </div>
-          <div class="col-0 col-sm-0 col-md-0 col-lg-5">
-            <div class="login_cart">
-              <div class="login">
-                <div class="icon_user">
-                  <b-icon class="icon-user" icon="person-fill"> </b-icon>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-4">
+              <div id="search">
+                <div class="search">
+                  <input
+                    type="text"
+                    class="input-search"
+                    placeholder="Nhập từ khóa cần tìm..."
+                  />
+                  <button class="search-button">
+                    <b-icon class="icon-search" icon="search"> </b-icon>
+                  </button>
                 </div>
+                <div class="cart-mobile">
+                  <a href="#"
+                    ><b-icon class="icon-cart" icon="cart-check-fill"> </b-icon
+                    ><strong class="cart_product_number"> 1 </strong></a
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="col-0 col-sm-0 col-md-0 col-lg-5">
+              <div class="login_cart">
+                <div class="login">
+                  <div class="icon_user">
+                    <b-icon class="icon-user" icon="person-fill"> </b-icon>
+                  </div>
 
-                <div class="signUp_signIn">
-                  <strong>Tài khoản</strong>
-                  <div class="log_or_reg">
-                    <router-link to="/Login" @click="active_category == 0">Đăng nhập</router-link>
-                    <span>*</span>
-                    <a href="/Register">Đăng ký</a>
+                  <div class="signUp_signIn">
+                    <strong>Tài khoản</strong>
+                    <div class="log_or_reg">
+                      <router-link to="/Login">Đăng nhập</router-link>
+                      <span>*</span>
+                      <router-link to="/Register">Đăng ký</router-link>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div class="cart">
-                <div class="icon_cart">
-                  <b-icon class="icon-cart" icon="cart-check-fill"> </b-icon>
+                <div class="cart">
+                  <div class="icon_cart">
+                    <b-icon class="icon-cart" icon="cart-check-fill"> </b-icon>
+                  </div>
+                  <a href="#" class="show_cart">
+                    <span class="in_cart">
+                      <strong>Giỏ hàng</strong>
+                      <span><b>1</b> <span>Sản phẩm</span></span>
+                    </span>
+                  </a>
                 </div>
-                <a href="#" class="show_cart">
-                  <span class="in_cart">
-                    <strong>Giỏ hàng</strong>
-                    <span><b>1</b> <span>Sản phẩm</span></span>
-                  </span>
-                </a>
               </div>
             </div>
+          </b-row>
+        </div>
+      </div>
+      <div class="header-foot container-fluid">
+        <div class="container">
+          <div class="menu ">
+            <ul class="list_menu">
+              <li class="list">
+                <router-link to="/">Trang chủ</router-link>
+              </li>
+              <li class="list">
+                <router-link to="/Living-room">phòng khách</router-link>
+              </li>
+              <li class="list">
+                <router-link to="/Dining-room">phòng ăn</router-link>
+              </li>
+              <li class="list">
+                <router-link to="/Beb-room">phòng ngủ</router-link>
+              </li>
+              <li class="list">
+                <router-link to="/Work-room">phòng làm việc</router-link>
+              </li>
+              <li class="list">
+                <router-link to="/Kitchen">bếp</router-link>
+              </li>
+              <li class="list">
+                <router-link to="/Decorations">đồ trang trí</router-link>
+              </li>
+              <li class="list">
+                <router-link to="/News">tin tức</router-link>
+              </li>
+              <li class="list">
+                <router-link to="#">liên hệ</router-link>
+              </li>
+            </ul>
           </div>
-        </b-row>
-      </div>
-    </div>
-    <div class="header-foot container-fluid">
-      <div class="container">
-        <div class="menu ">
-          <ul class="list_menu">
-            <li class="list" :class="{active: active_category == 1}">
-              <router-link to="/Home" @click="active_category = 1">Trang chủ</router-link>
-            </li>
-            <li class="list" :class="{active: active_category == 2}">
-              <a href="">Phòng khách</a>
-              </li>
-            <li class="list" :class="{active: active_category == 3}">
-              <a href="#">Phòng ăn</a>
-              </li>
-            <li class="list" :class="{active: active_category == 4}">
-              <a href="#">Phòng ngủ</a>
-              </li>
-            <li class="list" :class="{active: active_category == 5}">
-              <a href="#">Phòng làm việc</a>
-              </li>
-            <li class="list" :class="{active: active_category == 6}">
-              <a href="#">Bếp</a>
-              </li>
-            <li class="list" :class="{active: active_category == 7}">
-              <a href="#">Đồ trang trí</a>
-              </li>
-            <li class="list" :class="{active: active_category == 8}">
-              <a href="#">Tin tức</a>
-              </li>
-            <li class="list" :class="{active: active_category == 9}">
-              <a href="#">Liên hệ</a>
-              </li>
-          </ul>
         </div>
       </div>
-    </div>
-    <div class="list-menu-mobile" v-if="show" style="left:0px;">
-      <div class="clos-icon">
-        <b-icon class="icon-clos" icon="x-square" @click="show = !show">
-        </b-icon>
-      </div>
+      <div class="list-menu-mobile" v-if="show" style="left:0px;">
+        <div class="clos-icon">
+          <b-icon class="icon-clos" icon="x-square" @click="show = !show">
+          </b-icon>
+        </div>
 
-      <div class="menu-login-mobile">
-        <div class="menu_mobile">
-          <h5
-            @click="(show_menu = true), (show_login = false)"
-            v-if="show_menu == true"
-            class="active-left"
-            :class="{active: show_menu == true}"
-          >
-            Danh mục
-          </h5>
-          <h5
-            v-else
-            @click="(show_menu = true), (show_login = false)"
-            
-          >
-            Danh mục
-          </h5>
-          <transition name="fade">
-            <ul class="menu_mb active-tag" v-show="show_menu" v-if="show_menu">
-              <li class="list-mobile"><a href="/Home" @click="show =! show">Trang chủ</a></li>
-              <li class="list-mobile"><a href="#">Phòng khách</a></li>
-              <li class="list-mobile"><a href="#">Phòng ăn</a></li>
-              <li class="list-mobile"><a href="#">Phòng ngủ</a></li>
-              <li class="list-mobile"><a href="#">Phòng làm việc</a></li>
-              <li class="list-mobile"><a href="#">Bếp</a></li>
-              <li class="list-mobile"><a href="#">Đồ trang trí</a></li>
-              <li class="list-mobile"><a href="#">Tin tức</a></li>
-              <li class="list-mobile"><a href="#">Liên hệ</a></li>
-            </ul>
-          </transition>
-        </div>
-        <div class="account">
-          <h5
-            @click="(show_menu = false), (show_login = true)"
-            v-if="show_login == true"
-            class="active-right"
-            :class="{active: show_login == true}"
-          >
-            Tài khoản
-          </h5>
-          <h5
-            @click="(show_menu = false), (show_login = true)"
-            v-else
-            
-          >
-            Tài khoản
-          </h5>
-          <transition name="fade">
-            <ul
-              class="login-mobile active-tag"
-              v-show="show_login"
-              v-if="show_login"
+        <div class="menu-login-mobile">
+          <div class="menu_mobile">
+            <h5
+              @click="(show_menu = true), (show_login = false)"
+              v-if="show_menu == true"
+              class="active-left"
+              :class="{ active: show_menu == true }"
             >
-              <li class="list-mobile"><a href="/Login">Đăng nhập</a></li>
-              <li class="list-mobile"><a href="/register">Đăng ký</a></li>
-            </ul>
-          </transition>
+              Danh mục
+            </h5>
+            <h5 v-else @click="(show_menu = true), (show_login = false)">
+              Danh mục
+            </h5>
+            <transition name="fade">
+              <ul
+                class="menu_mb active-tag"
+                v-show="show_menu"
+                v-if="show_menu"
+              >
+                <li class="list-mobile" @click="show = !show">
+                  <router-link to="/">Trang chủ</router-link>
+                </li>
+                <li class="list-mobile" @click="show = !show">
+                  <router-link to="/Living-room">phòng khách</router-link>
+                </li>
+                <li class="list-mobile" @click="show = !show">
+                  <router-link to="/Dining-room">phòng ăn</router-link>
+                </li>
+                <li class="list-mobile" @click="show = !show">
+                  <router-link to="/Beb-room">Phòng ngủ</router-link>
+                </li>
+                <li class="list-mobile" @click="show = !show">
+                  <router-link to="/Work-room">Phòng làm việc</router-link>
+                </li>
+                <li class="list-mobile" @click="show = !show">
+                  <router-link to="/Kitchen">Bếp</router-link>
+                </li>
+                <li class="list-mobile" @click="show = !show">
+                  <router-link to="/Decorations">Đồ trang trí</router-link>
+                </li>
+                <li class="list-mobile" @click="show = !show">
+                  <router-link to="/News">Tin tức</router-link>
+                </li>
+                <li class="list-mobile" @click="show = !show">
+                  <router-link to="#">Liên hệ</router-link>
+                </li>
+              </ul>
+            </transition>
+          </div>
+          <div class="account">
+            <h5
+              @click="(show_menu = false), (show_login = true)"
+              v-if="show_login == true"
+              class="active-right"
+              :class="{ active: show_login == true }"
+            >
+              Tài khoản
+            </h5>
+            <h5 @click="(show_menu = false), (show_login = true)" v-else>
+              Tài khoản
+            </h5>
+            <transition name="fade">
+              <ul
+                class="login-mobile active-tag"
+                v-show="show_login"
+                v-if="show_login"
+              >
+                <li class="list-mobile" @click="show = !show">
+                  <router-link to="/Login">Đăng nhập</router-link>
+                </li>
+                <li class="list-mobile" @click="show = !show">
+                  <router-link to="/register">Đăng ký</router-link>
+                </li>
+              </ul>
+            </transition>
+          </div>
         </div>
       </div>
+      <div class="list-menu-mobile" v-else style="left:-1000px;"></div>
+      <router-view></router-view>
     </div>
-
-    <div class="list-menu-mobile" v-else style="left:-1000px;"></div>
-    <router-view></router-view>
-  </div>
-  
   </div>
 </template>
 
 <script>
-
 export default {
-   components: {
-    
-    },
+  components: {},
   data() {
     return {
       show: false,
       show_menu: true,
       show_login: false,
-      active_category:1,
+      categories: [
+        { category: "Trang chủ", link: "/" },
+        { category: ">phòng khách", link: "/Living-room" },
+        { category: "Phòng ăn", link: "" },
+        { category: "Phòng ngủ", link: "" },
+        { category: "Phòng làm việc", link: "" },
+        { category: "Bếp", link: "" },
+        { category: "Đồ trang trí", link: "" },
+        { category: "Tin tức", link: "" },
+        { category: "Liên hệ", link: "" },
+      ],
     };
   },
-  methods:{
-    test(){
-      console.log(this.active_category)
-    }
-  },
-  created(){
-    this.test();
-  }
+  methods: {},
+  created() {},
 };
 </script>
 
@@ -251,11 +269,12 @@ a {
 li {
   list-style: none !important;
 }
-.router-link-exact-active{
+.router-link-exact-active,
+.active {
   background: #ff9f00;
   height: 100%;
 }
-.router-link-exact-active:hover{
+.router-link-exact-active:hover {
   color: white !important;
 }
 .header-top {
@@ -280,8 +299,7 @@ li {
   color: #459a07;
   font-weight: 500;
   font-size: 15px;
-  transition: all .2s ease-in-out;
-
+  transition: all 0.2s ease-in-out;
 }
 .phone a:hover {
   color: #fda91e;
@@ -374,7 +392,7 @@ li {
 }
 .log_or_reg a {
   color: black;
-  transition: all .2s ease-in-out !important;
+  transition: all 0.2s ease-in-out !important;
   font-size: 13px;
 }
 .log_or_reg a:hover {
@@ -404,7 +422,7 @@ li {
 .list {
   display: flex;
   float: left;
- 
+
   transition: all 0.15s ease-in-out;
 }
 .list:hover {
@@ -415,7 +433,6 @@ li {
   text-transform: uppercase;
   font-size: 17px;
   padding: 10px 10px;
-  
 }
 .menu-mobile {
   display: none;
@@ -430,7 +447,7 @@ li {
   .list a {
     font-size: 14px;
   }
-  .phone{
+  .phone {
     display: none;
   }
 }
@@ -517,7 +534,7 @@ li {
     display: flex;
     justify-content: flex-end;
   }
-  .icon-clos:hover{
+  .icon-clos:hover {
     color: tomato !important;
   }
   .icon-clos {
@@ -530,7 +547,7 @@ li {
   .menu-login-mobile {
     width: 100%;
   }
-  .menu-login-mobile h5{
+  .menu-login-mobile h5 {
     padding: 10px 0px;
     width: 50%;
     float: left;
@@ -550,8 +567,6 @@ li {
     border-radius: 2px;
     border-bottom: 1px solid #acacac;
     background: #f3f3f3;
-
-    
   }
   .active-right {
     border-top: 1px solid #acacac;
@@ -559,7 +574,6 @@ li {
     border-radius: 2px;
     border-bottom: 1px solid #acacac;
     background: #f3f3f3;
-
   }
   .active-tag {
     background: #f3f3f3;
@@ -588,17 +602,16 @@ li {
   .list-mobile {
     width: 100%;
     border-bottom: 1px solid #acacac;
-    height: 40px;
     background: #f3f3f3;
     z-index: 100;
   }
   .list-mobile a {
     color: rgba(0, 0, 0, 0.6);
-    padding: 10px;
-    min-width: 100% !important;
-    line-height: 40px;
+    padding: 5px 10px;
     font-size: 17px;
     font-weight: 600;
+    display: inline-block;
+    width: 100%;
   }
   .list-mobile a:hover {
     color: #ff9f00;
@@ -608,5 +621,4 @@ li {
     border-top: 1px solid #acacac;
   }
 }
-
 </style>
