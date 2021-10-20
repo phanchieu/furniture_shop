@@ -9,7 +9,7 @@ import BebRoom from '../views/category/bebRoom.vue'
 import WorkRoom from '../views/category/workRoom.vue'
 import Kitchen from '../views/category/kitchen.vue'
 import Decorations from '../views/category/decorations.vue'
-import News from '../views/news/news.vue'
+import News from '../views/news/sidebar_news.vue'
 
 
 
