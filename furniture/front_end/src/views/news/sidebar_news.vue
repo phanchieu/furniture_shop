@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="sidebar">
-      <h1>TIN TỨC</h1>
       <div class="title">
         <h5>
           <a href="" class="tp_title">
@@ -28,7 +27,7 @@
           </div>
           <div class="title_Related">
             <a href=""
-              ><p>{{ news.title }}</p></a
+              >{{ news.title }}</a
             >
             <div class="date_time">
               <span>{{ news.date_time }}</span>
