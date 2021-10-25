@@ -86,19 +86,19 @@ export default {
       products: [
         {
           img: "1.jpg",
-          name: "Kệ TV Batista",
-          price: "5990000",
+          name: "Bộ bàn ăn Stefano",
+          price: "14950000",
         },
         {
           img: "2.jpg",
-          name: "Sofa giường",
-          price: "2990000",
+          name: "Bộ bàn ăn Marryland",
+          price: "3990000",
         },
 
         {
           img: "3.jpg",
-          name: "Ghế bành Viking Freja",
-          price: "1100000",
+          name: "Bộ bàn ăn Edward",
+          price: "1290000",
         },
       ],
     };

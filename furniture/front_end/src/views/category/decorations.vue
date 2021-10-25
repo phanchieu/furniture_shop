@@ -86,29 +86,29 @@ export default {
       products: [
         {
           img: "1.jpg",
-          name: "Kệ TV Batista",
-          price: "5990000",
+          name: "Đệm ngồi Viking Kudde",
+          price: "1190000",
         },
         {
           img: "2.jpg",
-          name: "Sofa giường",
-          price: "2990000",
+          name: "Móc dán tường Elektra",
+          price: "13000",
         },
 
         {
           img: "3.jpg",
-          name: "Ghế bành Viking Freja",
-          price: "1100000",
+          name: "Miếng bọc cạnh bàn Elektra",
+          price: "11000",
         },
         {
           img: "4.jpg",
-          name: "Ghế bành Viking Freja",
-          price: "1100000",
+          name: "Thiết bị chốt an toàn Elektra",
+          price: "39000",
         },
         {
           img: "5.jpg",
-          name: "Ghế bành Viking Freja",
-          price: "1100000",
+          name: "Vải bọc ghế đôn",
+          price: "199000",
         },
       ],
     };

@@ -86,24 +86,24 @@ export default {
       products: [
         {
           img: "1.jpg",
-          name: "Kệ TV Batista",
-          price: "5990000",
+          name: "Ghế bành Viking Freja",
+          price: "1100000",
         },
         {
           img: "2.jpg",
-          name: "Sofa giường",
-          price: "2990000",
+          name: "Ghế bành NanJing",
+          price: "1492500",
         },
 
         {
           img: "3.jpg",
-          name: "Ghế bành Viking Freja",
-          price: "1100000",
+          name: "Sofa giường Temasek",
+          price: "1990000",
         },
         {
           img: "4.jpg",
-          name: "Ghế bành Viking Freja",
-          price: "1100000",
+          name: "Bàn góc Caruso",
+          price: "1290000",
         },
       ],
     };

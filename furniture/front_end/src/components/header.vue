@@ -131,7 +131,7 @@
                 <router-link to="/News">tin tức</router-link>
               </li>
               <li class="list">
-                <router-link to="#">liên hệ</router-link>
+                <router-link to="/Contact">liên hệ</router-link>
               </li>
             </ul>
           </div>
@@ -187,7 +187,7 @@
                   <router-link to="/News">Tin tức</router-link>
                 </li>
                 <li class="list-mobile" @click="show = !show">
-                  <router-link to="#">Liên hệ</router-link>
+                  <router-link to="/Contact">Liên hệ</router-link>
                 </li>
               </ul>
             </transition>

@@ -26,9 +26,11 @@
             /></a>
           </div>
           <div class="title_Related">
-            <a href=""
+            <div class="tt_related">
+              <a href=""
               >{{ news.title }}</a
             >
+            </div>
             <div class="date_time">
               <span>{{ news.date_time }}</span>
             </div>
@@ -128,17 +130,28 @@ h5::before {
   align-items: center;
 }
 .img img {
-  width: 100px;
-  max-height: 100px;
+  width: 110px;
+  height: 80px;
 }
 .title_Related {
   margin: 0 10px;
 }
+.tt_related{
+  height: 45px;
+  overflow: hidden;
+}
 .title_Related a {
+  height: 45px;
   color: #000;
   transition: all 0.3s ease-in-out;
+  overflow: hidden;
 }
 .title_Related a:hover {
   color: #ff9f00;
+}
+.date_time{
+  font-size: 14px;
+  margin: 10px 0px;
+  color: #a5a5a5;
 }
 </style>
