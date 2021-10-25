@@ -86,24 +86,24 @@ export default {
       products: [
         {
           img: "1.jpg",
-          name: "Kệ TV Batista",
-          price: "5990000",
+          name: "Sofa giường",
+          price: "2990000",
         },
         {
           img: "2.jpg",
-          name: "Sofa giường",
-          price: "2990000",
+          name: "Kệ sách FreeStyle",
+          price: "6490000",
         },
 
         {
           img: "3.jpg",
-          name: "Ghế bành Viking Freja",
-          price: "1100000",
+          name: "Kệ TV Cobra",
+          price: "6490000",
         },
         {
           img: "4.jpg",
-          name: "Đôn mềm Connemara",
-          price: "4490000",
+          name: "Kệ TV Kitka",
+          price: "5490000",
         },
       ],
     };

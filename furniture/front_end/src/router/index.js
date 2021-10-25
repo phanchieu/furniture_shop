@@ -10,6 +10,7 @@ import WorkRoom from '../views/category/workRoom.vue'
 import Kitchen from '../views/category/kitchen.vue'
 import Decorations from '../views/category/decorations.vue'
 import News from '../views/news/news.vue'
+import Contact from '../views/contact/contact.vue'
 
 
 
@@ -65,6 +66,11 @@ const routes = [
     path: '/News',
     name: 'News',
     component: News
+  },
+  {
+    path: '/Contact',
+    name: 'Contact',
+    component: Contact
   },
   
   

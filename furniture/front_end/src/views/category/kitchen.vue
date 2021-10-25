@@ -86,19 +86,19 @@ export default {
       products: [
         {
           img: "1.jpg",
-          name: "Kệ TV Batista",
-          price: "5990000",
+          name: "Khăn tay Soft",
+          price: "39000",
         },
         {
           img: "2.jpg",
-          name: "Sofa giường",
-          price: "2990000",
+          name: "Túi đựng đồ giặt Lynn",
+          price: "49000",
         },
 
         {
           img: "3.jpg",
-          name: "Ghế bành Viking Freja",
-          price: "1100000",
+          name: "Đôn mềm Connemara",
+          price: "4490000",
         },
       ],
     };
