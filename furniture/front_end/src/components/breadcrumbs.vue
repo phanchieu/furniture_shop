@@ -1,26 +1,15 @@
 <template>
-  <b-breadcrumb :items="items"></b-breadcrumb>
+  <div>
+    
+  </div>
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        items: [
-          {
-            text: 'Trang chủ',
-            to:'/'
-          },
-          {
-            text: 'Login',
-            to: '/Login'
-          },
-          {
-            text: 'Login',
-            active: true
-          }
-        ]
-      }
-    }
-  }
+export default {
+
+}
 </script>
+
+<style>
+
+</style>
