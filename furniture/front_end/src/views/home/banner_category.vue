@@ -182,7 +182,7 @@ figure img {
   
   figure img {
     max-width: 100%;
-    max-height: 45vh;
+    max-height: 40vh;
   }
 }
 
