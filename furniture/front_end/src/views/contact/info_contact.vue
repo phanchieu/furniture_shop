@@ -27,6 +27,9 @@ export default {
 </script>
 
 <style scoped>
+.info_contact{
+  padding: 30px 0;
+}
 .container{
   max-width: 1140px;
 }

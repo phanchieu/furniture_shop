@@ -11,6 +11,7 @@ import Kitchen from '../views/category/kitchen.vue'
 import Decorations from '../views/category/decorations.vue'
 import News from '../views/news/news.vue'
 import Contact from '../views/contact/contact.vue'
+import Cart from '../views/cart/cart.vue'
 
 
 
@@ -71,6 +72,11 @@ const routes = [
     path: '/Contact',
     name: 'Contact',
     component: Contact
+  },
+  {
+    path: '/Cart',
+    name: 'Cart',
+    component: Cart
   },
   
   

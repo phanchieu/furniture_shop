@@ -62,9 +62,10 @@
                   </button>
                 </div>
                 <div class="cart-mobile">
-                  <a href="#"
+                  <router-link to="/Cart"
+                   style="background:transparent;"
                     ><b-icon class="icon-cart" icon="cart-check-fill"> </b-icon
-                    ><strong class="cart_product_number"> 1 </strong></a
+                    ><strong class="cart_product_number"> 1 </strong></router-link
                   >
                 </div>
               </div>
@@ -90,12 +91,12 @@
                   <div class="icon_cart">
                     <b-icon class="icon-cart" icon="cart-check-fill"> </b-icon>
                   </div>
-                  <a href="#" class="show_cart">
+                  <router-link to="/Cart" class="show_cart" style="background-color:transparent;">
                     <span class="in_cart">
                       <strong>Giỏ hàng</strong>
                       <span><b>1</b> <span>Sản phẩm</span></span>
                     </span>
-                  </a>
+                  </router-link>
                 </div>
               </div>
             </div>

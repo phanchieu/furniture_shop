@@ -185,5 +185,4 @@ figure img {
     max-height: 40vh;
   }
 }
-
 </style>
