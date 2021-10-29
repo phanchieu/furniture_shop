@@ -35,7 +35,7 @@
             </div>
           </div>
         </div>
-      <!-- <Map/> -->
+      <Map/>
       <Info-contact/>
       </div>
       <Footer/>
@@ -45,11 +45,11 @@
 <script>
 import Footer from '../../components/footer.vue'
 import InfoContact from './info_contact.vue'
-// import Map from "./map.vue"
+import Map from "./map.vue"
 
 export default {
   components: { 
-    // Map,
+    Map,
     InfoContact,
     Footer 
     },
