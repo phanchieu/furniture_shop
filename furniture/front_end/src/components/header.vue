@@ -223,34 +223,35 @@
         </div>
       </div>
       <div class="list-menu-mobile" v-else style="left:-1000px;"></div>
+      <Breadcrumbs :items="items">{{getRouter()}}</Breadcrumbs>
       <router-view></router-view>
     </div>
   </div>
 </template>
 
 <script>
+import Breadcrumbs from './breadcrumbs.vue';
 export default {
-  components: {},
+  components: {
+    Breadcrumbs,
+    },
   data() {
     return {
       show: false,
       show_menu: true,
       show_login: false,
-      categories: [
-        { category: "Trang chủ", link: "/" },
-        { category: ">phòng khách", link: "/Living-room" },
-        { category: "Phòng ăn", link: "" },
-        { category: "Phòng ngủ", link: "" },
-        { category: "Phòng làm việc", link: "" },
-        { category: "Bếp", link: "" },
-        { category: "Đồ trang trí", link: "" },
-        { category: "Tin tức", link: "" },
-        { category: "Liên hệ", link: "" },
-      ],
+      items:[],
     };
   },
-  methods: {},
-  created() {},
+  methods: {
+    getRouter(){
+      this.items = this.$route.matched
+      // console.log(this.$route);
+    }
+  },
+  created() {
+    // this.getRouter();
+  },
 };
 </script>
 

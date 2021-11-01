@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="container">
-      <breadcrumbs/>
     </div>
       <div id="login">
 
@@ -52,12 +51,10 @@
 </template>
 
 <script>
-import Breadcrumbs from '../../components/breadcrumbs.vue'
 import Footer from '../../components/footer.vue'
 export default {
     components: {
         Footer,
-        Breadcrumbs,
     },
     methods:{
 
