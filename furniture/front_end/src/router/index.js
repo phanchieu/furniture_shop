@@ -13,8 +13,6 @@ import News from '../views/news/news.vue'
 import Contact from '../views/contact/contact.vue'
 import Cart from '../views/cart/cart.vue'
 
-
-
 Vue.use(VueRouter)
 
 const routes = [
@@ -25,61 +23,60 @@ const routes = [
   },
   {
     path: '/Login',
-    name: 'Login',
+    name: 'Đăng nhập',
     component: Login
   },
   {
     path: '/Register',
-    name: 'Register',
+    name: 'Đăng ký',
     component: Register
   },
   {
     path: '/Living-room',
-    name: 'Living-room',
+    name: 'Phòng khách',
     component: Livingroom
   },
   {
     path: '/Dining-room',
-    name: 'Dining-room',
+    name: 'Phòng ăn',
     component: DiningRoom
   },
   {
     path: '/Beb-room',
-    name: 'Beb-room',
+    name: 'Phòng ngủ',
     component: BebRoom
   },
   {
     path: '/Work-room',
-    name: 'Work-room',
+    name: 'Phòng làm việc',
     component: WorkRoom
   },
   {
     path: '/Kitchen',
-    name: 'Kitchen',
+    name: 'Bếp',
     component: Kitchen
   },
   {
     path: '/Decorations',
-    name: 'Decorations',
+    name: 'Đồ trang trí',
     component: Decorations
   },
   {
     path: '/News',
-    name: 'News',
-    component: News
+    name: 'Tin tức',
+    component: News,
   },
+  
   {
     path: '/Contact',
-    name: 'Contact',
+    name: 'Liên hệ',
     component: Contact
   },
   {
     path: '/Cart',
-    name: 'Cart',
+    name: 'Giỏ hàng',
     component: Cart
   },
-  
-  
   
   
 ]
