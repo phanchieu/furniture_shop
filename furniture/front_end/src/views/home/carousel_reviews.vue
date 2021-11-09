@@ -84,12 +84,10 @@ export default {
   background-size: cover;
   opacity: .7;
 }
-.evaluate{
-  
-}
+
 .reviews{
   text-align: center;
-  
+  padding: 0 5px;
 }
 .reviews .img{
   width: 100%;
@@ -114,5 +112,10 @@ export default {
   color: white;
   font-weight: 500;
   font-size: 1rem;
+}
+@media only screen and (max-width: 425px) {
+  .container-fluid{
+    top: 20%;
+  }
 }
 </style>

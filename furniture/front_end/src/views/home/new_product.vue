@@ -118,13 +118,9 @@ export default {
 </script>
 
 <style scoped>
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
 .container {
   max-width: 1140px;
+  margin: 0 auto !important;
 }
 a {
   text-decoration: none !important;
@@ -140,6 +136,9 @@ li {
   left: 0;
   right: 0;
   border-bottom: 3px solid #ebebeb;
+}
+.title h5{
+  margin: 0;
 }
 h5::before {
   position: absolute;
@@ -165,7 +164,7 @@ h5::before {
   left: 0;
   right: 0;
   bottom: -4px;
-  height: 3px;
+  height: 5px;
 }
 
 .buttons-coll {

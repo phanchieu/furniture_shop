@@ -30,9 +30,9 @@
             </div>
             <div class="buy">
               <div class="buttons-coll">
-                      <a href="" class="custom-btn view_now">
+                      <router-link to="/Cart/Pay" class="custom-btn view_now">
                         <span>Tiến hành đặt hàng</span>
-                      </a>
+                      </router-link>
                     </div>
             </div>
         </div>
@@ -65,9 +65,9 @@
             </div>
             <div class="buy buy_mb">
               <div class="buttons-coll">
-                      <a href="" class="custom-btn view_now">
+                      <router-link to="/Cart/Pay" class="custom-btn view_now">
                         <span class="btn_mb">Tiến hành đặt hàng</span>
-                      </a>
+                      </router-link>
                     </div>
             </div>
         </div>
@@ -88,6 +88,7 @@ export default {
   components: { Footer },
   data(){
     return{
+      active: null,
       price_total:0,
       products:[
         {
@@ -144,8 +145,14 @@ export default {
     },
     remove(index){
       this.$delete(this.products,index);
-    }
+    },
+    // test(){
+
+    // }
   },
+  created(){
+    // this.test();
+  }
 }
 </script>
 

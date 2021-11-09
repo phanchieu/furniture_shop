@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="new_product">
+    <div id="favorite_product">
       <div class="container">
         <div class="title">
           <h5>
@@ -51,7 +51,7 @@
         
       </div>
     </div>
-    <div class="banner_for_new_product">
+    <div class="banner_for_favorite_product">
           <div class="container">
             <div class="banner">
               <img
@@ -148,13 +148,9 @@ export default {
 </script>
 
 <style scoped>
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
 .container {
   max-width: 1140px;
+  margin: 0 auto !important;
 }
 a {
   text-decoration: none !important;
@@ -162,7 +158,7 @@ a {
 li {
   list-style: none;
 }
-#new_product {
+#favorite_product {
   padding: 30px 0px;
 }
 .title {
@@ -170,6 +166,9 @@ li {
   left: 0;
   right: 0;
   border-bottom: 3px solid #ebebeb;
+}
+.title h5{
+  margin: 0;
 }
 h5::before {
   position: absolute;
@@ -332,7 +331,7 @@ h5::before {
 .view_now span:hover:after {
   width: 100%;
 }
-.banner_for_new_product {
+.banner_for_favorite_product {
   padding: 30px 0px;
 }
 .custom-b {

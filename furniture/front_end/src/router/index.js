@@ -12,6 +12,7 @@ import Decorations from '../views/category/decorations.vue'
 import News from '../views/news/news.vue'
 import Contact from '../views/contact/contact.vue'
 import Cart from '../views/cart/cart.vue'
+import Pay from '../views/cart/pay.vue'
 
 Vue.use(VueRouter)
 
@@ -75,8 +76,13 @@ const routes = [
   {
     path: '/Cart',
     name: 'Giỏ hàng',
-    component: Cart
+    component: Cart,
   },
+  {
+    path:'/Cart/Pay',
+    name:'Thanh toán',
+    component: Pay
+  }
   
   
 ]

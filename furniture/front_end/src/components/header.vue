@@ -224,8 +224,8 @@
       </div>
       <div class="list-menu-mobile" v-else style="left:-1000px;"></div>
       <Breadcrumbs :items="items">{{getRouter()}}</Breadcrumbs>
-      <router-view></router-view>
     </div>
+      <router-view></router-view>
   </div>
 </template>
 
@@ -258,7 +258,7 @@ export default {
 <style scoped>
 * {
   padding: 0;
-  margin: 0;
+  margin:0;
   box-sizing: border-box;
 }
 

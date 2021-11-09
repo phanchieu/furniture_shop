@@ -22,25 +22,25 @@
               </div>
               <div class="address_phone_mail">
                 <div class="address address-all">
-                  <a href="#" class="icon-address">
+                  <router-link to="/Contact" class="icon-address">
                     <b-icon icon="geo-alt-fill" class="ic_address"></b-icon>
-                  </a>
-                  <a href="#"
+                  </router-link>
+                  <router-link to="/Contact"
                     >Tầng 3, Hà Thành Plaza, 102 Thái Thịnh, Trung Liệt, Đống
-                    Đa, Hà Nội</a
+                    Đa, Hà Nội</router-link
                   >
                 </div>
                 <div class="phone address-all">
-                  <a href="#" class="icon-address">
+                  <a href="tel:0355322912" class="icon-address">
                     <b-icon icon="telephone-fill" class="ic_address"></b-icon>
                   </a>
-                  <a href="#">0355322912</a>
+                  <a href="tel:0355322912">0355322912</a>
                 </div>
                 <div class="mail address-all">
-                  <a href="#" class="icon-address">
+                  <a href="mailto:phanchieudev@gmail.com" class="icon-address">
                     <b-icon icon="envelope-fill" class="ic_address"></b-icon>
                   </a>
-                  <a href="#">phanchieudev@gmail.com</a>
+                  <a href="mailto:phanchieudev@gmail.com">phanchieudev@gmail.com</a>
                 </div>
               </div>
             </div>
@@ -111,16 +111,16 @@ export default {};
 </script>
 
 <style scoped>
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
 .container {
-  max-width: 1140px !important;
+  max-width: 1140px;
+  margin: 0 auto !important;
 }
 a {
   text-decoration: none !important;
+}
+ul{
+  padding: 0;
+  margin: 0;
 }
 li {
   list-style: none !important;
@@ -130,7 +130,6 @@ li {
   padding: 40px 0px;
 }
 .address_phone_mail_content_logo {
-  padding: 0px 5px;
   border-right: 1px solid;
 }
 .logo img {
@@ -177,6 +176,7 @@ li {
 .address-all:hover a {
   color: #ff9f00;
 }
+
 .about h6 {
   color: white;
 }
