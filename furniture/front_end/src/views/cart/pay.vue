@@ -52,6 +52,9 @@
                          <div class="row">
                             <div class=" col-3 img_product">
                           <img :src="require(`@/assets/images/room/living_room/${product.img_product}`)" alt="">
+                          <div class="quantity_product">
+                            {{ product.quantity_product }}
+                          </div>
                         </div>
                         <div class="info_product col-5">
                           {{ product.name_product }}
@@ -267,6 +270,21 @@ a{
 
 .product .img_product img{
   max-width: 100%;
+  position: relative;
+}
+.quantity_product{
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 0;
+  left: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  font-size: 13px;
+  background: #459a07;
+  color: white;
 }
 .info_product,
 .price_product{
@@ -296,11 +314,13 @@ a{
   border: 1px solid transparent;
   max-width: 100%;
   transition: all .3s;
+  font-size: 14px;
+  padding: 0 10px;
 }
-.checkout_coupon button span{
+/* .checkout_coupon button span{
   font-size: 15px;
   padding: 5px 10px;
-}
+} */
 .checkout_coupon button:hover{
   color: #459a07;
   background: transparent;
