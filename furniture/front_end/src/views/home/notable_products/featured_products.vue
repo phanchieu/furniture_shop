@@ -108,7 +108,7 @@ export default {
 }
 .container {
   max-width: 1140px;
-  margin-top: 30px;
+  margin: 0 auto !important;
 }
 a {
   text-decoration: none !important;

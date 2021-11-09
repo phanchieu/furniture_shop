@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="featured_category">
+    <div id="notable_product">
       <div class="container">
         <div class="title">
           <h5>
@@ -133,21 +133,24 @@ export default {
 </script>
 
 <style scoped>
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
 .container {
   max-width: 1140px;
+  margin: 0 auto !important;
 }
 a {
   text-decoration: none !important;
 }
+ul{
+  margin: 0;
+  padding: 0;
+}
+h5{
+  margin: 0;
+}
 li {
   list-style: none;
 }
-#featured_category {
+#notable_product {
   padding-top: 30px;
 }
 .title {
@@ -292,6 +295,7 @@ h5::before {
 }
 .banner {
   position: relative;
+  padding: 0 10px;
 }
 .banner img {
   max-width: 100%;

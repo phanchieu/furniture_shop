@@ -128,16 +128,19 @@ export default {
 </script>
 
 <style scoped>
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
 .container {
   max-width: 1140px;
+  margin: 0 auto;
 }
 a {
   text-decoration: none !important;
+}
+ul{
+  padding: 0;
+  margin: 0;
+}
+h5{
+  margin: 0;
 }
 li {
   list-style: none;

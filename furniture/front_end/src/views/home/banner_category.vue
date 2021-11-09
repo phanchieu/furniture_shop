@@ -46,11 +46,11 @@ export default {
   data() {
     return {
       imgs_banner: [
-        { img: "1.jpg", title: "phòng ăn", link: "#" },
-        { img: "2.jpg", title: "phòng khách", link: "#" },
-        { img: "3.jpg", title: "phòng bếp", link: "#" },
-        { img: "4.jpg", title: "phòng làm việc", link: "#" },
-        { img: "5.jpg", title: "phòng ngủ", link: "#" },
+        { img: "1.jpg", title: "phòng ăn", link: "/Dining-room" },
+        { img: "2.jpg", title: "phòng khách", link: "/Living-room" },
+        { img: "3.jpg", title: "phòng bếp", link: "/Kitchen" },
+        { img: "4.jpg", title: "phòng làm việc", link: "/Work-room" },
+        { img: "5.jpg", title: "phòng ngủ", link: "/Bed-room" },
       ],
     };
   },
@@ -58,11 +58,6 @@ export default {
 </script>
 
 <style scoped>
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
 a {
   text-decoration: none;
 }
@@ -85,9 +80,10 @@ a {
 
 .container {
   max-width: 1140px;
+  margin: 0 auto !important;
 }
-.category {
-}
+/* .category {
+} */
 
 .hover14 figure {
   position: relative;

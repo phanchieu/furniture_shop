@@ -63,11 +63,6 @@ export default {
 </script>
 
 <style scoped>
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
 #login{
     padding: 30px 0;
 }

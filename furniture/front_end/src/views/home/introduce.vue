@@ -139,11 +139,7 @@ export default {
 </script>
 
 <style scoped>
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
+
 .container {
   max-width: 1140px;
 }
@@ -159,25 +155,25 @@ a {
   border-top: 1px solid #ebebeb;
   border-bottom: 1px solid #ebebeb;
 }
-.span {
+.in4 .span {
   display: flex;
   border-right: 1px solid #ebebeb;
   border-left: 1px solid #ebebeb;
 }
-.span:hover .hov {
+.in4 .span:hover .hov {
   transition: linear 0.3s;
   opacity: 0.8;
 }
-.span:hover .hov1 {
+.in4 .span:hover .hov1 {
   background-color: #2976d2;
 }
-.span:hover .hov2 {
+.in4 .span:hover .hov2 {
   background-color: #de2c2c;
 }
-.span:hover .hov3 {
+.in4 .span:hover .hov3 {
   background-color: #27d367;
 }
-.span:hover .hov4 {
+.in4 .span:hover .hov4 {
   background-color: #ac29d1;
 }
 .hov {

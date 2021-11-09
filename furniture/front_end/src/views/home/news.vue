@@ -86,16 +86,14 @@ export default {
 </script>
 
 <style scoped>
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
 .container {
   max-width: 1140px;
 }
 a {
   text-decoration: none !important;
+}
+h5{
+  margin: 0;
 }
 li {
   list-style: none;
