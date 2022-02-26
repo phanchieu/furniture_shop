@@ -3,9 +3,9 @@
     <div class="sidebar">
       <div class="title">
         <h5>
-          <a href="" class="tp_title">
+          <span class="tp_title">
             Danh mục tin tức
-          </a>
+          </span>
         </h5>
       </div>
       <div class="category">
@@ -13,53 +13,62 @@
       </div>
       <div class="title">
         <h5>
-          <a href="" class="tp_title">
+          <span class="tp_title">
             Có thể bạn quan tâm
-          </a>
+          </span>
         </h5>
       </div>
-      <div class="Related_posts">
-        <div class="related" v-for="(news, index) in news" :key="index">
+      <div class="Related_posts" v-for="(nn, index) in news" :key="index">
+        <div class="related" v-for="(n, index) in nn" :key="index"  @mousedown="view_news(n)">
           <div class="img">
-            <a href=""
-              ><img :src="require(`@/assets/images/news/${news.img}`)" alt=""
-            /></a>
+            <router-link :to="link_view"
+              ><img :src="require(`@/${n.cover_image}`)" alt=""
+            /></router-link>
           </div>
           <div class="title_Related">
             <div class="tt_related">
-              <a href=""
-              >{{ news.title }}</a
+              <router-link :to="link_view"
+              >{{ n.title_introduce }}</router-link
             >
             </div>
             <div class="date_time">
-              <span>{{ news.date_time }}</span>
+              <span>{{ n.date_time }}</span>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <router-view />
+    <!-- {{view_news()}} -->
   </div>
 </template>
 
 <script>
+import {mapGetters,mapMutations} from 'vuex'
 export default {
   data() {
     return {
-      news: [
-        {
-          img: "1.jpg",
-          title: "15 Xu Hướng Thiết Kế Nội Thất Mới Nhất",
-          date_time: "21/12/2019",
-        },
-        {
-          img: "2.jpg",
-          title: "Giải pháp thiết kế nội thất nhà ống hiện đại",
-          date_time: "21/12/2019",
-        },
-      ],
+      link_view:'/View-news',
+      news: [],
     };
   },
+  methods:{
+    ...mapGetters([
+      'dataNews',
+    ]),
+    ...mapMutations([
+      'to_viewNews'
+    ]),
+    getNews(){
+      this.news = this.dataNews()
+    },
+    view_news(n){
+      this.to_viewNews([n])
+    }
+  },
+    created(){
+      this.getNews()
+      // console.log(this.to_viewNews())
+    }
 };
 </script>
 
@@ -92,10 +101,11 @@ h5::before {
   transition: all ease 0.3s;
   font-weight: 600;
   font-size: 1.2rem;
+  cursor: default;
 }
-.tp_title:hover {
+/* .tp_title:hover {
   color: #459a07;
-}
+} */
 .tp_title::after {
   content: "";
   position: absolute;

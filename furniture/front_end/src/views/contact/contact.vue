@@ -53,6 +53,14 @@ export default {
     InfoContact,
     Footer 
     },
+    methods:{
+    scrollToTop() {
+      window.scrollTo(0,0);
+    },
+  },
+  created(){
+    this.scrollToTop();
+  }
 
 }
 </script>

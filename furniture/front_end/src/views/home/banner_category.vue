@@ -9,23 +9,23 @@
               :autoplay="false" 
               :nav="false" 
               :dots="false"
-              :responsive="{0:{items:2,margin:10},350:{items:2,margin:15},600:{items:3,margin:30},900:{items:4,margin:30}}">
+              :responsive="{0:{items:1,margin:10,autoplay:true },350:{items:2,margin:15,autoplay:true},600:{items:3,margin:30},900:{items:4,margin:30}}">
                 <div
                   class="hover14"
                   v-for="(img_banner, index) in imgs_banner"
                   :key="index"
                 >
                   <figure>
-                    <a :href="img_banner.link"
+                    <router-link :to="img_banner.link"
                       ><img
                         :src="
                           require(`@/assets/images/image_home/banner_category/${img_banner.img}`)
                         "
-                    /></a>
+                    /></router-link>
                     <div class="title">
-                      <a :href="img_banner.link"
+                      <router-link :to="img_banner.link"
                         ><h3>{{ img_banner.title }}</h3>
-                        <span>Tìm hiểu thêm</span></a
+                        <span>Tìm hiểu thêm</span></router-link
                       >
                     </div>
                   </figure>
@@ -72,7 +72,7 @@ a {
   background-image: url("../../assets/images/image_home/banner_background/banner_index_category_background.png");
   background-size: cover;
   opacity: 0.95;
-  height: 400px;
+  height: auto;
   display: flex;
   align-items: center;
   width: 100%;
@@ -87,6 +87,7 @@ a {
 
 .hover14 figure {
   position: relative;
+  margin: 20px 0px;
 }
 figure {
   overflow: hidden;
@@ -129,7 +130,6 @@ figure {
 }
 figure img {
   max-width: 100%;
-  height: 300px;
 }
 .title:hover a h3 {
   text-shadow: 1px 1px 1px #ff9f00;
@@ -178,7 +178,6 @@ figure img {
   
   figure img {
     max-width: 100%;
-    max-height: 40vh;
   }
 }
 </style>

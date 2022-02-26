@@ -21,6 +21,8 @@ import router from './router'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
+//ProductZoomer
+
 
 Vue.config.productionTip = false
 new Vue({

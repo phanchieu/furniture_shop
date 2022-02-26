@@ -1,21 +1,25 @@
 <template>
   <div class="container" v-if="active == 1">
     <div class="res1">
-      <carousel :autoplay="true" :nav="false" :dots="false" :responsive="{0:{items:2},600:{items:4},1000:{items:6}}">
+      <carousel
+        :autoplay="true"
+        :nav="false"
+        :dots="false"
+        :responsive="{ 0: { items: 2 }, 600: { items: 4 }, 1000: { items: 6 } }"
+      >
         <div
           class="product_new"
           v-for="(product, index) in products"
           :key="index"
+          @mousedown="view(product)"
         >
-          <a href="" class="img">
+          <router-link :to="link_view_product" class="img">
             <img
-              :src="
-                require(`@/assets/images/room/living_room/${product.img}`)
-              "
+              :src="require(`@/${product.img}`)"
               alt=""
               class="img_product"
             />
-          </a>
+          </router-link>
           <div class="product_info">
             <div class="vote">
               <i class="fas fa-star"></i>
@@ -25,13 +29,17 @@
               <i class="fas fa-star"></i>
             </div>
             <h6 class="product_name">
-              <a href="">{{ product.name }}</a>
+              <router-link :to="link_view_product">{{
+                product.name
+              }}</router-link>
             </h6>
             <div class="price">
               {{ formatPrice(product.price) }}<span>đ</span>
             </div>
             <div class="buttons-coll">
-              <a href="" class="custom-btn view_now"><span>Xem ngay</span></a>
+              <router-link :to="link_view_product" class="custom-btn view_now"
+                ><span>Xem ngay</span></router-link
+              >
             </div>
           </div>
         </div>
@@ -41,63 +49,37 @@
 </template>
 
 <script>
-
-import carousel from 'vue-owl-carousel'
-
+import carousel from "vue-owl-carousel";
+import { mapMutations,mapGetters } from "vuex";
 export default {
-    components: { carousel },
-    props:['active'],
-      data() {
+  components: { carousel },
+  props: ["active"],
+  data() {
     return {
-      img_banner:'banner_index_intro_top.jpg',
-      products: [
-        {
-          img: "1.jpg",
-          name: "Tủ TV FreeStyle",
-          price: "6990000",
-        },
-        {
-          img: "2.jpg",
-          name: "Ghế bành Domingo",
-          price: "3290000",
-        },
-
-        {
-          img: "3.jpg",
-          name: "Kệ TV Mozart",
-          price: "2990000",
-        },
-        {
-          img: "4.jpg",
-          name: "Kệ TV Batista",
-          price: "5990000",
-        },
-        {
-          img: "5.jpg",
-          name: "Ghế đôn Carnaby",
-          price: "2490000",
-        },
-        {
-          img: "6.jpg",
-          name: "Ghế thư giãn Sitting Bull",
-          price: "1790000",
-        },
-        {
-          img: "7.jpg",
-          name: "Ghế đẩu Sacramento",
-          price: "1990000",
-        },
-      ],
+      link_view_product: "/View-product",
+      products: [],
     };
   },
   methods: {
+    ...mapMutations(["viewProduct"]),
+    ...mapGetters(['ProductsLivingRoom']),
     formatPrice(value) {
       let val = (value / 1).toFixed().replace(".");
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     },
+    view(product) {
+      let Data = [product];
+      this.viewProduct(Data);
+    },
+    getProducts(){
+      var getPrd = this.ProductsLivingRoom()
+      this.products = getPrd.products
+    }
   },
-}
-
+  created(){
+    this.getProducts()
+  }
+};
 </script>
 
 <style scoped>

@@ -4,7 +4,7 @@
       <div class="container">
         <div class="title">
           <h5>
-            <a href="" class="tp_title">
+            <a class="tp_title">
               Sản phẩm được ưa thích
             </a>
           </h5>
@@ -15,16 +15,15 @@
               class="col-6 col-md-4 col-lg-2 product_new"
               v-for="(product, index) in products"
               :key="index"
+              @mousedown="view(product)"
             >
-              <a href="" class="img">
+              <router-link :to="link_view_product" class="img">
                 <img
-                  :src="
-                    require(`@/assets/images/image_home/favorite_product/${product.img}`)
-                  "
+                  :src="require(`@/${product.img}`)"
                   alt=""
                   class="img_product"
                 />
-              </a>
+              </router-link>
               <div class="product_info">
                 <div class="vote">
                   <i class="fas fa-star"></i>
@@ -34,114 +33,232 @@
                   <i class="fas fa-star"></i>
                 </div>
                 <h6 class="product_name">
-                  <a href="">{{ product.name }}</a>
+                  <router-link :to="link_view_product">{{
+                    product.name
+                  }}</router-link>
                 </h6>
                 <div class="price">
                   {{ formatPrice(product.price) }}<span>đ</span>
                 </div>
                 <div class="buttons-coll">
-                  <a href="" class="custom-btn view_now"
-                    ><span>Xem ngay</span></a
+                  <router-link
+                    :to="link_view_product"
+                    class="custom-btn view_now"
+                    ><span>Xem ngay</span></router-link
                   >
                 </div>
               </div>
             </div>
           </b-row>
         </div>
-        
       </div>
     </div>
     <div class="banner_for_favorite_product">
-          <div class="container">
-            <div class="banner">
-              <img
-                class=""
-                :src="require(`@/assets/images/image_home/banner/${img_banner}`)"
-                alt=""
-              />
-              <div class="custom-b custom_banner">
-                <div></div>
-              </div>
-            </div>
+      <div class="container">
+        <div class="banner">
+          <img
+            class=""
+            :src="require(`@/assets/images/image_home/banner/${img_banner}`)"
+            alt=""
+          />
+          <div class="custom-b custom_banner">
+            <div></div>
           </div>
         </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 export default {
   data() {
     return {
-      img_banner:'banner_index_intro_bottom.jpg',
+      link_view_product: "/View-product",
+      img_banner: "banner_index_intro_bottom.jpg",
       products: [
         {
-          img: "1.jpg",
+          img: "assets/images/room/living_room/2.jpg",
+          view_img_product: [
+            "assets/images/room/living_room/img_view_prd/2-1.jpg",
+            "assets/images/room/living_room/img_view_prd/2-2.jpg",
+            "assets/images/room/living_room/img_view_prd/2-3.jpg",
+          ],
           name: "Ghế bành Domingo",
-          price: "3290000",
+          price: 3290000,
+          quantity: 1,
+          colors: ["Nâu"],
+          sizes: ["Lớn", "Vừa"],
+          category: "Phòng khách",
+          materials: ["Gỗ - Bọc Da"],
         },
         {
-          img: "2.jpg",
+          img: "assets/images/room/room_decorations/2.jpg",
+          view_img_product: [
+            "assets/images/room/room_decorations/img_view_prd/2-1.jpg",
+          ],
           name: "Móc dán tường Elektra",
-          price: "13000",
+          price: 13000,
+          quantity: 1,
+          colors: ["Trắng"],
+          sizes: ["Lớn", "Vừa"],
+          category: "Đồ trang trí",
+          materials: ["Khác"],
         },
-
         {
-          img: "3.jpg",
+          img: "assets/images/room/room_decorations/4.jpg",
+          view_img_product: [
+            "assets/images/room/room_decorations/img_view_prd/4-1.jpg",
+            "assets/images/room/room_decorations/img_view_prd/4-2.jpg",
+          ],
           name: "Thiết bị chốt an toàn Elektra",
-          price: "39000",
+          price: 39000,
+          quantity: 1,
+          colors: ["Trắng"],
+          sizes: ["Lớn", "Vừa", "Nhỏ"],
+          category: "Đồ trang trí",
+          materials: ["Khác"],
         },
         {
-          img: "4.jpg",
+          img: "assets/images/room/kitchen/2.jpg",
+          view_img_product: [
+            "assets/images/room/kitchen/img_view_prd/2-1.jpg",
+            "assets/images/room/kitchen/img_view_prd/2-2.jpg",
+          ],
           name: "Túi đựng đồ giặt Lynn",
-          price: "49000",
+          price: 49000,
+          quantity: 1,
+          colors: ["Trắng", "Đỏ"],
+          sizes: ["Lớn", "Vừa"],
+          category: "Phòng bếp",
+          materials: ["Khác"],
         },
         {
-          img: "5.jpg",
+          img: "assets/images/room/dining_room/1.jpg",
+          view_img_product: [
+            "assets/images/room/dining_room/img_view_prd/1-1.jpg",
+            "assets/images/room/dining_room/img_view_prd/1-2.jpg",
+            "assets/images/room/dining_room/img_view_prd/1-3.jpg",
+          ],
           name: "Bộ bàn ăn Stefano",
-          price: "14950000",
+          price: 14950000,
+          quantity: 1,
+          colors: ["Xám", "Vàng"],
+          sizes: ["Lớn", "Vừa"],
+          category: "Phòng ăn",
+          materials: ["Gỗ - Bọc Vải"],
         },
         {
-          img: "6.jpg",
+          img: "assets/images/room/dining_room/3.jpg",
+          view_img_product: [
+            "assets/images/room/dining_room/img_view_prd/3-1.jpg",
+            "assets/images/room/dining_room/img_view_prd/3-2.jpg",
+          ],
           name: "Bộ bàn ăn Edward",
-          price: "1290000",
+          price: 1290000,
+          quantity: 1,
+          colors: ["Vàng", "Nâu đen"],
+          sizes: ["Vừa", "Nhỏ"],
+          category: "Phòng ăn",
+          materials: ["Gỗ"],
         },
         {
-          img: "7.jpg",
+          img: "assets/images/room/room_decorations/1.jpg",
+          view_img_product: [
+            "assets/images/room/room_decorations/img_view_prd/1-1.jpg",
+            "assets/images/room/room_decorations/img_view_prd/1-2.jpg",
+            "assets/images/room/room_decorations/img_view_prd/1-3.jpg",
+          ],
           name: "Đệm ngồi Viking Kudde",
-          price: "1190000",
+          price: 1190000,
+          quantity: 1,
+          colors: ["Đỏ", "Ghi"],
+          sizes: ["Vừa", "Nhỏ"],
+          category: "Đồ trang trí",
+          materials: ["Gỗ - Bọc Vải"],
         },
         {
-          img: "8.jpg",
+          img: "assets/images/room/room_decorations/3.jpg",
+          view_img_product: [
+            "assets/images/room/room_decorations/img_view_prd/3-1.jpg",
+            "assets/images/room/room_decorations/img_view_prd/3-2.jpg",
+          ],
           name: "Miếng bọc cạnh bàn Elektra",
-          price: "11000",
+          price: 11000,
+          quantity: 1,
+          colors: ["Trắng"],
+          sizes: ["Lớn", "Nhỏ"],
+          category: "Đồ trang trí",
+          materials: ["Khác"],
         },
         {
-          img: "9.jpg",
+          img: "assets/images/room/kitchen/1.jpg",
+          view_img_product: [
+            "assets/images/room/kitchen/img_view_prd/1-1.jpg",
+            "assets/images/room/kitchen/img_view_prd/1-2.jpg",
+          ],
           name: "Khăn tay Soft",
-          price: "39000",
+          price: 39000,
+          quantity: 1,
+          colors: ["Xanh", "Nâu"],
+          sizes: ["Lớn", "Nhỏ"],
+          category: "Phòng bếp",
+          materials: ["Khác"],
         },
         {
-          img: "10.jpg",
+          img: "assets/images/room/work_room/2.jpg",
+          view_img_product: [
+            "assets/images/room/work_room/img_view_prd/2-1.jpg",
+            "assets/images/room/work_room/img_view_prd/2-2.jpg",
+          ],
           name: "Kệ sách FreeStyle",
-          price: "6490000",
+          price: 6490000,
+          quantity: 1,
+          colors: ["Trắng", "Vàng"],
+          sizes: ["Vừa", "Nhỏ"],
+          category: "Phòng làm việc",
+          materials: ["Gỗ"],
         },
         {
-          img: "11.jpg",
+          img: "assets/images/room/dining_room/2.jpg",
+          view_img_product: [
+            "assets/images/room/dining_room/img_view_prd/2-1.jpg",
+            "assets/images/room/dining_room/img_view_prd/2-2.jpg",
+          ],
           name: "Bộ bàn ăn Marryland",
-          price: "3990000",
+          price: 3990000,
+          quantity: 1,
+          colors: ["Vàng"],
+          sizes: ["Lớn", "Nhỏ"],
+          category: "Phòng ăn",
+          materials: ["Gỗ"],
         },
         {
-          img: "12.jpg",
+          img: "assets/images/room/living_room/9.jpg",
+          view_img_product: [
+            "assets/images/room/living_room/img_view_prd/9-1.jpg",
+          ],
           name: "Bàn cafe Cabaret",
-          price: "1390000",
+          price: 1390000,
+          quantity: 1,
+          colors: ["Đen"],
+          sizes: ["Vừa", "Nhỏ"],
+          category: "Phòng khách",
+          materials: ["Gỗ"],
         },
       ],
     };
   },
   methods: {
+    ...mapMutations(["viewProduct"]),
     formatPrice(value) {
       let val = (value / 1).toFixed().replace(".");
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    },
+    view(product) {
+      let Data = [product];
+      this.viewProduct(Data);
     },
   },
 };
@@ -167,7 +284,7 @@ li {
   right: 0;
   border-bottom: 3px solid #ebebeb;
 }
-.title h5{
+.title h5 {
   margin: 0;
 }
 h5::before {
@@ -184,9 +301,9 @@ h5::before {
   font-weight: 600;
   font-size: 1.2rem;
 }
-.tp_title:hover {
+/* .tp_title:hover {
   color: #459a07;
-}
+} */
 .tp_title::after {
   content: "";
   position: absolute;

@@ -12,13 +12,13 @@
               <th>thành tiền</th>
               <th>xóa</th>
             </tr>
-            <tr v-for="(product,index) in products" :key="index" >
-              <td> <a href=""><img :src="require(`@/assets/images/room/living_room/${product.img_product}`)" alt="" class="img_product"></a> </td>
-              <td><div class="name_product"> <a href="">{{ product.name_product }}</a> </div></td>
-              <td><div class="price_product"><span>{{ formatPrice(product.price_product) }}₫</span></div></td>
+            <tr v-for="(product,index) in products" :key="index" @mouseover="view(product)">
+              <td> <router-link :to="link_view_product"><img :src="require(`@/${product.img}`)" alt="" class="img_product"></router-link> </td>
+              <td><div class="name_product"> <router-link :to="link_view_product">{{ product.name }} - {{ product.color }} - {{ product.size }}</router-link> </div></td>
+              <td><div class="price_product"><span>{{ formatPrice(product.price) }}₫</span></div></td>
               <td><div class="quantity">
                <div class="down" @click="quantity_down(product)">-</div> 
-              <input type="text" :value="product.quantity_product" disabled>
+              <input type="text" v-model="product.quantity_in_cart" disabled>
                <div class="up" @click="quantity_up(product)">+</div></div></td>
               <td><div class="into_money"> {{ formatPrice(product.into_money) }}₫ </div></td>
               <td><div class="delete" @click="remove(index)"> <i class="fas fa-trash-alt"></i> </div></td>
@@ -43,18 +43,18 @@
           <div class="info_cart_mobile"  v-for="(product,index) in products" :key="index">
            <div class="row info_mb">
               <div class="img_product_cart col-4">
-              <a href=""><img :src="require(`@/assets/images/room/living_room/${product.img_product}`)" alt="" class="img_product"></a>
+              <router-link :to="link_view_product"><img :src="require(`@/${product.img}`)" alt="" class="img_product"></router-link>
             </div>
             <div class="info_cart col-7">
               <div class="name_product_mb">
-                <a href="">{{ product.name_product }}</a>
+                <router-link :to="link_view_product">{{ product.name }} - {{ product.color }} - {{ product.size }}</router-link>
               </div>
               <div class="quantity quantity_mb">
                <div class="down" @click="quantity_down(product)">-</div> 
-              <input type="text" :value="product.quantity_product" disabled>
+              <input type="text" v-model="product.quantity" disabled>
                <div class="up" @click="quantity_up(product)">+</div>
                </div>
-               <div class="price_product_mb">Giá: <span>{{ formatPrice(product.price_product) }}₫</span></div>
+               <div class="price_product_mb">Giá: <span>{{ formatPrice(product.price) }}₫</span></div>
                <div class="into_money_mb"> Thành tiền: <span>{{ formatPrice(product.into_money) }}₫</span> </div>
             </div>
                <div class="delete_mb" @click="remove(index)"> <i class="fas fa-trash-alt"></i> </div>
@@ -75,6 +75,7 @@
       <div class="no_product" v-if="price_total == 0">
         <div class="container">
           <h5>Giỏ hàng hiện chưa có sản phẩm nào!</h5>
+          <!-- <p>{{ cart() }}</p> -->
         </div>
       </div>
       {{total_price()}}
@@ -84,48 +85,66 @@
 
 <script>
 import Footer from '../../components/footer.vue';
+import {mapGetters,mapMutations} from 'vuex'
 export default {
   components: { Footer },
   data(){
     return{
       active: null,
       price_total:0,
+      link_view_product:'/View-product',
       products:[
-        {
-          img_product:'4.jpg',
-          name_product:'Kệ TV Batista - Gỗ - Vừa - Nâu',
-          price_product:5990000,
-          quantity_product: 1,
-          into_money: 5990000,
-        },
-        {
-          img_product:'1.jpg',
-          name_product:'Tủ TV FreeStyle',
-          price_product:6990000,
-          quantity_product: 1,
-          into_money: 6990000,
+       {
+          name:'Tủ TV FreeStyle',
+           view_img_product:[
+             'assets/images/room/living_room/img_view_prd/1-1.jpg',
+             'assets/images/room/living_room/img_view_prd/1-2.jpg',
+             'assets/images/room/living_room/img_view_prd/1-3.jpg'
+             ],
+          quantity:1,
+          price:6990000,
+          img:'assets/images/room/living_room/1.jpg',
+          colors:['Trắng','Đen'],
+          sizes:['Lớn','Vừa','Nhỏ'],
         },
       ]
     }
   },
+  computed:{
+    // ...mapGetters([
+    //   'cart',
+    // ]),
+    // getPrd: function () {
+    //   return this.products
+    // }
+  },
   methods:{
+    ...mapGetters([
+      'cart',
+    ]),
+    ...mapMutations([
+      'updateCart',
+      'viewProduct',
+      'quantity_product_cart',
+      'delete_product_cart'
+    ]),
     quantity_down(product){
-      if(product.quantity_product--){
-        if(product.quantity_product<1){
-          product.quantity_product= 1; 
-          if(product.quantity_product== 1){
+      if(product.quantity_in_cart--){
+        if(product.quantity_in_cart<1){
+          product.quantity_in_cart= 1; 
+          if(product.quantity_in_cart== 1){
             product.into_money
           }
         }
         else{
-          product.into_money = product.into_money - product.price_product
+          product.into_money = product.quantity_in_cart * product.price
         }
       }
       
     },
     quantity_up(product){
-      if(product.quantity_product++){
-         product.into_money = product.into_money + product.price_product
+      if(product.quantity_in_cart++){
+         product.into_money = product.quantity_in_cart * product.price
       }
     },
     formatPrice(value) {
@@ -133,6 +152,7 @@ export default {
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     },
     total_price(){
+      if(this.products){
       var arr = [];
       this.products.forEach((product) => {
         arr.push(product.into_money);
@@ -141,17 +161,26 @@ export default {
           return total + num;
           },0);
           this.price_total = total_
-          // console.log(this.price_total)
+      }
+    },
+    getCart(){
+      this.products = this.cart()
+     
     },
     remove(index){
       this.$delete(this.products,index);
+      this.delete_product_cart(index)
+      // console.log(this.cart())
     },
-    // test(){
-
-    // }
+    view(product){
+      this.viewProduct([product])
+    },
+    test(){
+      // console.log(this.cart())
+    },
   },
   created(){
-    // this.test();
+    this.getCart()
   }
 }
 </script>

@@ -4,7 +4,7 @@
       <div class="category_product">
         <div class="title">
           <h5>
-            <a href="" class="tp_title">
+            <a class="tp_title">
               Danh mục sản phẩm
             </a>
           </h5>
@@ -35,7 +35,7 @@
       <div class="material">
         <div class="title">
           <h5>
-            <a href="" class="tp_title">
+            <a class="tp_title">
               Chất Liệu
             </a>
           </h5>
@@ -50,6 +50,8 @@
               type="checkbox"
               :id="material.material"
               class="fas fa-check"
+              :value="material.material"
+              v-model="fil_material"
             />
             <label :for="material.material">{{ material.material }}</label>
           </div>
@@ -58,14 +60,20 @@
       <div class="size">
         <div class="title">
           <h5>
-            <a href="" class="tp_title">
+            <a class="tp_title">
               Kích thước
             </a>
           </h5>
         </div>
         <div class="filter">
           <div class="checkbox" v-for="(size, index) in sizes" :key="index">
-            <input type="checkbox" :id="size.size" class="fas fa-check" />
+            <input
+              type="checkbox"
+              :id="size.size"
+              class="fas fa-check"
+              :value="size.size"
+              v-model="fil_size"
+            />
             <label :for="size.size">{{ size.size }}</label>
           </div>
         </div>
@@ -73,14 +81,20 @@
       <div class="color">
         <div class="title">
           <h5>
-            <a href="" class="tp_title">
+            <a class="tp_title">
               Màu sắc
             </a>
           </h5>
         </div>
         <div class="filter filter-color">
           <div class="checkbox" v-for="(color, index) in colors" :key="index">
-            <input type="checkbox" :id="color.color" class="fas fa-check" />
+            <input
+              type="checkbox"
+              :id="color.color"
+              class="fas fa-check"
+              :value="color.color"
+              v-model="fil_color"
+            />
             <label :for="color.color">{{ color.color }}</label>
           </div>
         </div>
@@ -88,7 +102,7 @@
       <div class="Selling_products">
         <div class="title">
           <h5>
-            <a href="" class="tp_title">
+            <a class="tp_title">
               Sản phẩm bán chạy
             </a>
           </h5>
@@ -98,20 +112,19 @@
             class="product"
             v-for="(product, index) in Selling_products"
             :key="index"
+            @mouseover="view(product)"
           >
             <div class="img_prd">
-              <a href=""
-                ><img
-                  :src="
-                    require(`@/assets/images/image_home/favorite_product/${product.img}`)
-                  "
-                  alt=""
-              /></a>
+              <router-link :to="link_view_product"
+                ><img :src="require(`@/${product.img}`)" alt=""
+              /></router-link>
             </div>
             <div class="name_price_prd">
               <div class="name_prd">
                 <h6>
-                  <a href="">{{ product.name }}</a>
+                  <router-link :to="link_view_product">{{
+                    product.name
+                  }}</router-link>
                 </h6>
               </div>
               <div class="price">
@@ -123,17 +136,24 @@
       </div>
     </div>
     <router-view></router-view>
+    {{ test() }}
   </div>
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 export default {
   data() {
     return {
+      link_view_product: "/View-product",
+      fil_color: [],
+      fil_size: [],
+      fil_material: [],
       materials: [
-        { material: "Khung gỗ - Bọc Vải" },
+        { material: "Gỗ - Bọc Vải" },
         { material: "Gỗ" },
-        { material: "Gồ - Bọc Da" },
+        { material: "Gỗ - Bọc Da" },
+        { material: "Khác" },
       ],
       sizes: [{ size: "Lớn" }, { size: "Vừa" }, { size: "Nhỏ" }],
       colors: [
@@ -149,23 +169,77 @@ export default {
         { color: "Hồng tím" },
       ],
       Selling_products: [
-        { img: "1.jpg", name: "Ghế bành Domingo", price: "3290000", id: 1 },
         {
-          img: "7.jpg",
-          name: "Đệm ngồi Viking Kudde",
-          price: "1190000",
-          id: 2,
+          img: "assets/images/room/living_room/2.jpg",
+          view_img_product: [
+            "assets/images/room/living_room/img_view_prd/2-1.jpg",
+            "assets/images/room/living_room/img_view_prd/2-2.jpg",
+            "assets/images/room/living_room/img_view_prd/2-3.jpg",
+          ],
+          name: "Ghế bành Domingo",
+          price: 3290000,
+          quantity: 1,
+          colors: ["Nâu"],
+          sizes: ["Lớn", "Vừa"],
+          category: "Phòng khách",
+          materials: ["Gỗ - Bọc Da"],
         },
-        { img: "2.jpg", name: "Móc dán tường Elektra", price: "13000", id: 3 },
+        {
+          img: "assets/images/room/room_decorations/1.jpg",
+          view_img_product: [
+            "assets/images/room/room_decorations/img_view_prd/1-1.jpg",
+            "assets/images/room/room_decorations/img_view_prd/1-2.jpg",
+            "assets/images/room/room_decorations/img_view_prd/1-3.jpg",
+          ],
+          name: "Đệm ngồi Viking Kudde",
+          price: 1190000,
+          quantity: 1,
+          colors: ["Đỏ", "Ghi"],
+          sizes: ["Vừa", "Nhỏ"],
+          category: "Đồ trang trí",
+          materials: ["Gỗ - Bọc Vải"],
+        },
+        {
+          img: "assets/images/room/room_decorations/2.jpg",
+          view_img_product: [
+            "assets/images/room/room_decorations/img_view_prd/2-1.jpg",
+          ],
+          name: "Móc dán tường Elektra",
+          price: 13000,
+          quantity: 1,
+          colors: ["Trắng"],
+          sizes: ["Lớn", "Vừa"],
+          category: "Đồ trang trí",
+          materials: ["Khác"],
+        },
       ],
     };
   },
+  computed: {},
   methods: {
+    ...mapMutations([
+      "viewProduct",
+      "filter_colors",
+      "filter_sizes",
+      "filter_materials",
+    ]),
+
     formatPrice(value) {
       let val = (value / 1).toFixed().replace(".");
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     },
+    view(product) {
+      let Data = [product];
+      this.viewProduct(Data);
+    },
+    test() {
+      this.filter_colors(this.fil_color);
+      this.filter_sizes(this.fil_size);
+      this.filter_materials(this.fil_material);
+      // console.log(this.fil_color)
+    },
   },
+  created() {},
 };
 </script>
 
@@ -201,10 +275,11 @@ h5::before {
   transition: all ease 0.3s;
   font-weight: 600;
   font-size: 1.2rem;
+  cursor: default;
 }
-.tp_title:hover {
+/* .tp_title:hover {
   color: #459a07;
-}
+} */
 .tp_title::after {
   content: "";
   position: absolute;
@@ -278,8 +353,7 @@ label:hover {
   color: #ff9f00;
 }
 .filter-color {
-  height: 155px;
-  overflow: auto;
+  height: auto;
 }
 .product {
   height: 100px;

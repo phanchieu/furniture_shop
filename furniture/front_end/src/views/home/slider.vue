@@ -42,4 +42,7 @@ export default {
   height: 100%;
   object-fit: cover !important;
 }
+.carousel{
+  z-index: 123;
+}
 </style>

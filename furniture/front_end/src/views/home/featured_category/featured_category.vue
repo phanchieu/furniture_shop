@@ -4,7 +4,7 @@
       <div class="container">
         <div class="title">
           <h5>
-            <a href="" class="tp_title">
+            <a class="tp_title">
               Danh mục nổi bật
             </a>
           </h5>
@@ -46,8 +46,7 @@
         </div>
       </div>
     </div>
-    <router-view></router-view>
-    
+    <!-- <router-view></router-view> -->
    <LivingRoom :active="active"></LivingRoom>
    <DiningRoom :active="active"></DiningRoom>
    <BebRoom :active="active"></BebRoom>
@@ -74,55 +73,10 @@ export default {
   data() {
     return {
       active: 1,
-      imgs_banner: [
-        { img: "banner_index_bottom_left.jpg" },
-        { img: "banner_index_bottom_right.jpg" },
-      ],
-      products: [
-        {
-          img: "1.jpg",
-          name: "Tủ TV FreeStyle",
-          price: "6990000",
-        },
-        {
-          img: "2.jpg",
-          name: "Bộ bàn ăn Stefano",
-          price: "14950000",
-        },
-
-        {
-          img: "3.jpg",
-          name: "Bộ bàn ăn Edward",
-          price: "3990000",
-        },
-        {
-          img: "4.jpg",
-          name: "Bàn cafe Cabaret",
-          price: "1390000",
-        },
-        {
-          img: "5.jpg",
-          name: "Bàn cafe Cabaret",
-          price: "1390000",
-        },
-        {
-          img: "6.jpg",
-          name: "Ghế bành Bogart",
-          price: "5490000",
-        },
-        {
-          img: "7.jpg",
-          name: "Ghế bành Connemara",
-          price: "7490000",
-        },
-      ],
     };
   },
   methods: {
-    formatPrice(value) {
-      let val = (value / 1).toFixed().replace(".");
-      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-    },
+   
   },
 };
 </script>
@@ -167,9 +121,9 @@ h5::before {
   font-weight: 600;
   font-size: 1.2rem;
 }
-.tp_title:hover {
+/* .tp_title:hover {
   color: #459a07;
-}
+} */
 .tp_title::after {
   content: "";
   position: absolute;
