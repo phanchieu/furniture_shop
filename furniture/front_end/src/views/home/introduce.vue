@@ -105,7 +105,7 @@
               <div class="link_product">
                 <h5>{{ img_title.title }}</h5>
                 <div class="buttons-coll">
-                  <a href="" class="custom-btn btn-3"><span>Xem ngay</span></a>
+                  <router-link :to="img_title.link" class="custom-btn btn-3"><span>Xem ngay</span></router-link>
                 </div>
               </div>
             </div>
@@ -123,14 +123,19 @@ export default {
   data() {
     return {
       imgs_introduce: [
-        { image: "banner_index_new_products.jpg", title: "Hàng mới về" },
+        { image: "banner_index_new_products.jpg", 
+          title: "Hàng mới về",
+          link: "/AllProducts"
+        },
         {
           image: "banner_index_promotion_products.jpg",
           title: "Khuyến mãi hot",
+          link: "/AllProducts"
         },
         {
           image: "banner_index_best_seller_products.jpg",
           title: "Bán chạy nhất",
+          link: "/AllProducts"
         },
       ],
     };

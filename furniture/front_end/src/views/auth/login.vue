@@ -11,20 +11,21 @@
               <div class="col-12 col-md-6 login">
                   <b-row>
                       <div class="text col-12"><span>Nếu bạn đã có tài khoản, đăng nhập tại đây. Hoặc </span><router-link to="/Register">Đăng ký</router-link></div>
+                      <div class="validate">{{ validate }}</div>
                       <div class="email_pass col-12">
-                          <form action="">
+                          <!-- <form action=""> -->
                               <div class="username">
                                 <label for="email" class="form-label">Email:</label>
-                                <input type="email" class="form-control" name="email" id="email" placeholder="Email" required autocomplete="off">
+                                <input type="email" class="form-control" name="email" id="email" placeholder="Email" required autocomplete="on" v-model="email">
                               </div>
                               <div class="password" >
                                 <label for="password" class="form-label">Mật khẩu:</label>
-                                <input type="password" name="password" id="password"  class="form-control" placeholder="Mật khẩu" required>
+                                <input type="password" name="password" id="password"  class="form-control" placeholder="Mật khẩu" required v-model="password">
                               </div>
                             <div class="buttons-coll">
-                            <button type="submit" class="custom-btn btn-submit"><span>Đăng nhập</span></button>
+                            <button type="submit" class="custom_btn btn_submit btn_login" @mousedown="login()"><span><router-link :to="login_success">Đăng nhập</router-link></span></button>
                             </div>
-                          </form>
+                          <!-- </form> -->
                       </div>
                   </b-row>
               </div>
@@ -37,7 +38,7 @@
                             <input type="email" name="email_forgotPass" id="forgotPw" class="form-control" placeholder="Email" required>
                            </div>
                             <div class="buttons-coll">
-                            <button type="submit" class="custom-btn btn-submit"><span>Lấy lại mật khẩu</span></button>
+                            <button class="custom_btn btn_submit"><span>Lấy lại mật khẩu</span></button>
                             </div>
                        </form>
                    </div>
@@ -51,18 +52,74 @@
 </template>
 
 <script>
+import {mapMutations} from 'vuex'
 import Footer from '../../components/footer.vue'
 export default {
     components: {
         Footer,
     },
+    data(){
+      return{
+        login_success:'',
+        email:'',
+        password:'',
+        validate:null,
+      }
+    },
     methods:{
-
+      ...mapMutations([
+        'check_login'
+      ]),
+      validate_form(){
+      var get_data = [localStorage.getItem('account')]
+      var check = JSON.parse(get_data)
+        if(this.email.trim().length == 0 || this.password.trim().length == 0){
+          this.validate = 'Vui lòng không bỏ trống các trường'
+        }else if(this.email == check.email && this.password == check.password){
+            this.validate = null
+          }else{this.validate = 'Tài khoản hoặc mật khẩu không đúng'}
+        
+      },
+      login(){
+        this.validate_form()
+        if(this.validate == null){
+          this.login_success = '/'
+          var user_login = true
+          localStorage.setItem('login', JSON.stringify(user_login))
+          this.check_login()
+        }
+        
+      },
+      creat_user(){
+        if(localStorage.getItem('account') == null){
+          var user =[{
+            id:'user',
+            fullname:'user',
+            email:'user',
+            phone:'user',
+            password:'user'
+          }]
+          localStorage.setItem('account', JSON.stringify(user));
+        }
+      },
+      
+    scrollToTop() {
+      window.scrollTo(0,0);
+    },
+    },
+    created(){
+      this.scrollToTop()
+      this.creat_user()
     }
 }
 </script>
 
 <style scoped>
+.validate{
+  color: red;
+  font-weight: 600;
+  font-size: 14px;
+}
 #login{
     padding: 30px 0;
 }
@@ -82,6 +139,9 @@ export default {
 }
 .text{
     margin: 0 0 10px;
+}
+.forgotPw .text{
+  padding: 0;
 }
 .text a{
     color: #fda91e;
@@ -113,31 +173,43 @@ form button{
     margin-top: 20px;
 }
 /* css btn */
-.custom-btn {
-    outline: none !important;
+.custom_btn {
     cursor: pointer;
     transition: all 0.5s ease-in-out;
     position: relative;
     background: #459a07;
-    display: inline-block;
 }
-.custom-btn:hover{
+.custom_btn:hover{
     background: white;
 }
-.btn-submit {
+.btn_submit {
   border: none;
 }
-.btn-submit span {
-    position: relative;
-    display: block;
-    padding: 7px 30px;
-    color: white;
+.btn_submit span {
+  display: block;
+  padding: 7px 30px;
+  color: white;
 }
-.btn-submit span:hover{
+.btn_login{
+  border: none;
+}
+.btn_login span{
+  padding: 0;
+}
+.btn_submit span a{
+  color: white;
+  display: inline-block;
+  padding: 7px 30px;
+  text-decoration: none;
+}
+.btn_submit:hover span{
     color: #459a07;
 }
-.btn-submit:before,
-.btn-submit:after {
+.btn_submit:hover a{
+    color: #459a07;
+}
+.btn_submit:before,
+.btn_submit:after {
   position: absolute;
   content: "";
   right: 0;
@@ -145,22 +217,22 @@ form button{
   background: #459a07;
   transition: all 0.5s ease-in-out;
 }
-.btn-submit:before {
+.btn_submit:before {
   height: 0%;
   width: 2px;
 }
-.btn-submit:after {
+.btn_submit:after {
   width: 0%;
   height: 2px;
 }
-.btn-submit:hover:before {
+.btn_submit:hover:before {
   height: 100%;
 }
-.btn-submit:hover:after {
+.btn_submit:hover:after {
   width: 100%;
 }
-.btn-submit span:before,
-.btn-submit span:after {
+.btn_submit span:before,
+.btn_submit span:after {
   position: absolute;
   content: "";
   left: 0;
@@ -168,18 +240,18 @@ form button{
   background: #459a07;
   transition: all 0.5s ease-in-out;
 }
-.btn-submit span:before {
+.btn_submit span:before {
   width: 2px;
   height: 0%;
 }
-.btn-submit span:after {
+.btn_submit span:after {
   width: 0%;
   height: 2px;
 }
-.btn-submit span:hover:before {
+.btn_submit span:hover:before {
   height: 100%;
 }
-.btn-submit span:hover:after {
+.btn_submit span:hover:after {
   width: 100%;
 }
 .form-control:focus{

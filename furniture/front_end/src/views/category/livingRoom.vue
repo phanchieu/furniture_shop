@@ -12,36 +12,44 @@
                 :src="require(`@/assets/images/banner_category/${img_banner}`)"
                 alt=""
               />
-              <div class="title"><h1>PHÒNG KHÁCH</h1></div>
+              <div class="title"><h1>Phòng khách</h1></div>
             </div>
             <div class="filter">
               <span>Sắp xếp</span>
-              <div class="select">
-                <select name="select-tag" id="select-tag">
-                  <option selected>Mặc định</option>
-                  <option value="1">Giá tăng dần</option>
-                  <option value="2">Giá giảm dần</option>
-                  <option value="3">A - Z</option>
-                  <option value="4">Z - A</option>
-                </select>
+              <div class="select" @click="list_sort_on =! list_sort_on">
+                <div class="sort" v-if="sort_default == true"><span>Mặc định</span><i class="fas fa-angle-down"></i></div>
+                <div class="sort" v-if="sort_price_up == true"><span>Giá tăng dần</span><i class="fas fa-angle-down"></i></div>
+                <div class="sort" v-if="sort_price_down == true"><span>Giá giảm dần</span><i class="fas fa-angle-down"></i></div>
+                <div class="sort" v-if="sort_a_to_z == true"><span>A - Z</span><i class="fas fa-angle-down"></i></div>
+                <div class="sort" v-if="sort_z_to_a == true"><span>Z - A</span><i class="fas fa-angle-down"></i></div>
               </div>
+               <div class="list_sort" :class="{list_sort_on:list_sort_on==true}" @click="list_sort_on =! list_sort_on">
+                  <ul>
+                  <!-- <li @click="sortDefault()">Mặc định</li> -->
+                  <li @click="prices_gradually_increase()">Giá tăng dần</li>
+                  <li @click="price_descending()">Giá giảm dần</li>
+                  <li @click="a_to_z()">A - Z</li>
+                  <li @click="z_to_a()">Z - A</li>
+                </ul>
+                </div>
             </div>
             <div class="products">
               <b-row>
                 <div
                   class="col-6 col-md-4 col-lg-3 product"
-                  v-for="(product, index) in products"
+                  v-for="(product, index) in computedProducts"
                   :key="index"
+                  @mousedown="view(product)"
                 >
-                  <a href="" class="img">
+                  <router-link :to="link_view_product" class="img">
                     <img
                       :src="
-                        require(`@/assets/images/room/living_room/${product.img}`)
+                        require(`@/${product.img}`)
                       "
                       alt=""
                       class="img_product"
                     />
-                  </a>
+                  </router-link>
                   <div class="product_info">
                     <div class="vote">
                       <i class="fas fa-star"></i>
@@ -51,14 +59,14 @@
                       <i class="fas fa-star"></i>
                     </div>
                     <h6 class="product_name">
-                      <a href="">{{ product.name }}</a>
+                      <router-link :to="link_view_product">{{ product.name }}</router-link>
                     </h6>
                     <div class="price">
                       {{ formatPrice(product.price) }}<span>đ</span>
                     </div>
-                    <div class="buttons-coll">
-                      <a href="" class="custom-btn view_now"
-                        ><span>Xem ngay</span></a
+                    <div class="buttons-coll" @mousedown="view(product)">
+                      <router-link :to="link_view_product" class="custom-btn view_now"
+                        ><span>Xem ngay</span></router-link
                       >
                     </div>
                   </div>
@@ -69,7 +77,7 @@
         </div>
       </div>
     </div>
-
+   <!-- {{ test()}} -->
     <Footer />
   </div>
 </template>
@@ -77,93 +85,140 @@
 <script>
 import Footer from "../../components/footer.vue";
 import Sidebar from "../../components/sidebar.vue";
+import {mapMutations,mapGetters} from 'vuex'
 
 export default {
   components: { Footer, Sidebar },
   data() {
     return {
-      img_banner: "banner_category.jpg",
-      products: [
-        {
-          img: "1.jpg",
-          name: "Tủ TV FreeStyle",
-          price: "6990000",
-        },
-        {
-          img: "2.jpg",
-          name: "Ghế bành Domingo",
-          price: "3290000",
-        },
-
-        {
-          img: "3.jpg",
-          name: "Kệ TV Mozart",
-          price: "2990000",
-        },
-        {
-          img: "4.jpg",
-          name: "Kệ TV Batista",
-          price: "5990000",
-        },
-        {
-          img: "5.jpg",
-          name: "Ghế đôn Carnaby",
-          price: "2490000",
-        },
-        {
-          img: "6.jpg",
-          name: "Ghế thư giãn Sitting Bull",
-          price: "1790000",
-        },
-        {
-          img: "7.jpg",
-          name: "Ghế đẩu Sacramento",
-          price: "1990000",
-        },
-        {
-          img: "8.jpg",
-          name: "Tủ ngăn kéo Batista",
-          price: "4990000",
-        },
-        {
-          img: "9.jpg",
-          name: "Bàn cafe Cabaret",
-          price: "1390000",
-        },
-        {
-          img: "10.jpg",
-          name: "Ghế bành Bogart",
-          price: "5490000",
-        },
-        {
-          img: "11.jpg",
-          name: "Ghế bành Connemara",
-          price: "7490000",
-        },
-        {
-          img: "12.jpg",
-          name: "Ghế đôn chicago",
-          price: "999000",
-        },
-        {
-          img: "13.jpg",
-          name: "Ghế bành trẻ em - Viking Junior",
-          price: "699000",
-        },
-        {
-          img: "14.jpg",
-          name: "Sofa Idasy 3C (có Đôn)",
-          price: "78780000",
-        },
-      ],
+      sort_default:true,
+      sort_a_to_z:false,
+      sort_z_to_a:false,
+      sort_price_up:false,
+      sort_price_down:false,
+      list_sort_on:false,
+      link_view_product:'/View-product',
+      img_banner: "livingroom_category.jpeg",
+      products:[],
     };
   },
+  computed: {
+    ...mapGetters([
+      'fil_color',
+      'fil_size',
+      'fil_material',
+    ]),
+    computedProducts: function () {
+      var color = this.fil_color
+      var size = this.fil_size
+      var material = this.fil_material
+      return this.products.filter((item) => {
+        return (color.length === 0
+         || color.includes(item.colors[0])
+          || color.includes(item.colors[1])
+           || color.includes(item.colors[2]
+            || color.includes(item.colors[3])
+             || color.includes(item.colors[4])
+              || color.includes(item.colors[5])
+               || color.includes(item.colors[6])
+                || color.includes(item.colors[7])
+                 || color.includes(item.colors[8])
+                  || color.includes(item.colors[9]))) 
+        &&(size.length === 0 
+        || size.includes(item.sizes[0]) 
+          || size.includes(item.sizes[1]) 
+            || size.includes(item.sizes[2]))
+        &&(material.length === 0 
+        || material.includes(item.materials[0]) 
+          || material.includes(item.materials[1]) 
+            || material.includes(item.materials[2]))
+      })
+    }
+  },
   methods: {
+    ...mapMutations([
+      'viewProduct',
+    ]),
+    ...mapGetters([
+      'ProductsLivingRoom'
+      ]),
+    // test(){
+    //   console.log(this.fil_color())
+    //   console.log(this.fil_size())
+    //   console.log(this.fil_material())
+    // },
+    getProducts(){
+      let products_livingtoom = this.ProductsLivingRoom()
+      this.products = products_livingtoom.products
+    },
     formatPrice(value) {
       let val = (value / 1).toFixed().replace(".");
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     },
+    view(product){
+      let Data = [product]
+      this.viewProduct(Data);
+    },
+    prices_gradually_increase(){
+      this.sort_price_up = true 
+      if(this.sort_price_up == true){
+      this.sort_price_down = false
+      this.sort_default = false
+      this.sort_a_to_z = false
+      this.sort_z_to_a = false
+      this.products.sort((a,b)=>{
+        return a.price - b.price
+      })
+      }
+    },
+    price_descending(){
+      this.sort_price_up = false 
+      this.sort_price_down = true
+      this.sort_default = false
+      this.sort_a_to_z = false
+      this.sort_z_to_a = false
+      if(this.sort_price_down == true){
+      this.products.sort((a,b)=>{
+        return b.price - a.price
+      })
+      }
+    },
+    a_to_z(){
+      this.sort_price_up = false 
+      this.sort_price_down = false
+      this.sort_default = false
+      this.sort_a_to_z = true
+      this.sort_z_to_a = false
+      if(this.sort_a_to_z == true){
+        this.products.sort((a,b)=>{
+          if(a.name.toLowerCase() < b.name.toLowerCase()) return -1;
+          if(a.name.toLowerCase() > b.name.toLowerCase()) return 1;
+          return 0;
+        })
+      }
+    },
+    z_to_a(){
+      this.sort_price_up = false 
+      this.sort_price_down = false
+      this.sort_default = false
+      this.sort_a_to_z = false
+      this.sort_z_to_a = true
+      if(this.sort_z_to_a == true){
+        this.products.sort((a,b)=>{
+          if(a.name.toLowerCase() > b.name.toLowerCase()) return -1;
+          if(a.name.toLowerCase() < b.name.toLowerCase()) return 1;
+          return 0;
+        })
+      }
+    },
+    scrollToTop() {
+      window.scrollTo(0,0);
+    },
   },
+  created(){
+    this.getProducts()
+    this.scrollToTop()
+  }
 };
 </script>
 
@@ -176,6 +231,13 @@ export default {
 }
 a {
   text-decoration: none !important;
+}
+li{
+  list-style: none;
+}
+ul,ol{
+  padding: 0;
+  margin: 0;
 }
 .banner {
   position: relative;
@@ -214,19 +276,55 @@ a {
   background-color: #ebebeb;
   height: 50px;
   padding: 0 30px;
+  margin: 0 0 20px;
+  position: relative;
 }
 .filter span {
   padding: 0 10px;
 }
-select {
-  border: 1px solid transparent;
-  outline: none;
-  padding: 3px 10px;
+.select {
+  width: 150px !important;
+  background: white;
+  border-radius: 3px 0px;
+  user-select: none;
 }
-#select-tag * {
-  border: none !important;
-  outline: none;
+.sort{
   padding: 3px 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.sort span{
+  font-size: 15px;
+  font-weight: 500;
+  padding: 0;
+}
+.list_sort{
+  background: white;
+  z-index: 1;
+  position: absolute;
+  top: 15%;
+  width: 150px;
+  border-radius: 0px 0px 5px 5px;
+  border: 1px solid #ebebeb;
+  overflow: hidden;
+  height: 0px;
+  transition: .3s ease-in-out;
+  font-size: 15px;
+  font-weight: 500;
+  user-select: none;
+  margin-top: 30px;
+}
+.list_sort ul li{
+  padding: 0px 10px;
+  cursor: pointer;
+}
+.list_sort ul li:hover{
+  background: #ff9f00;
+}
+.list_sort_on{
+  height: 90px !important;
 }
 .product {
   overflow: hidden;
@@ -240,6 +338,7 @@ select {
   height: 186px;
   transition: linear 0.2s;
   background: transparent;
+  object-fit: cover !important;
 }
 .img_product:hover {
   transform: scale(1.05);

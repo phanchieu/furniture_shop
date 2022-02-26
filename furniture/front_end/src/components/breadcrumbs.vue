@@ -3,7 +3,7 @@
     <div id="Breadcrumbs"  
     v-for="(item,index) in items" 
     :key="index" 
-    v-show="item.name != 'Home'">
+    :class="{hidden_brc:item.name == 'Home'}">
       <div class="container">
         <div class="Breadcrumbs">
           <router-link to="/">Trang chủ</router-link> 
@@ -28,14 +28,15 @@
 export default {
   data(){
     return{
-
+      
     }
   },
   props:["items"],
   methods:{
-    // test(){
-    //   console.log(this.items[0].name)
-    // }
+    test(){
+        // console.log(this.items)
+    
+    }
   },
   created(){
     // this.test();
@@ -71,5 +72,8 @@ a{
   font-weight: 600;
   color: black;
   cursor: auto;
+}
+.hidden_brc{
+  display: none;
 }
 </style>

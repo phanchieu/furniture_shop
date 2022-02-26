@@ -1,21 +1,22 @@
 <template>
   <div class="container" v-if="active == 4">
-    <div class="res1">
+    <div class="">
       <carousel :autoplay="true" :nav="false" :dots="false" :responsive="{0:{items:2},600:{items:4},1000:{items:6}}">
         <div
-          class="product_new"
+          class="product"
           v-for="(product, index) in products"
           :key="index"
+          @mousedown="view(product)"
         >
-          <a href="" class="img">
+          <router-link :to="link_view_product" class="img">
             <img
               :src="
-                require(`@/assets/images/room/work_room/${product.img}`)
+                require(`@/${product.img}`)
               "
               alt=""
               class="img_product"
             />
-          </a>
+          </router-link>
           <div class="product_info">
             <div class="vote">
               <i class="fas fa-star"></i>
@@ -25,13 +26,13 @@
               <i class="fas fa-star"></i>
             </div>
             <h6 class="product_name">
-              <a href="">{{ product.name }}</a>
+              <router-link :to="link_view_product">{{ product.name }}</router-link>
             </h6>
             <div class="price">
               {{ formatPrice(product.price) }}<span>đ</span>
             </div>
             <div class="buttons-coll">
-              <a href="" class="custom-btn view_now"><span>Xem ngay</span></a>
+              <router-link :to="link_view_product" class="custom-btn view_now"><span>Xem ngay</span></router-link>
             </div>
           </div>
         </div>
@@ -41,48 +42,37 @@
 </template>
 
 <script>
-
-import carousel from 'vue-owl-carousel'
-
+import carousel from "vue-owl-carousel";
+import { mapMutations,mapGetters } from "vuex";
 export default {
-    components: { carousel },
-    props:['active'],
-      data() {
+  components: { carousel },
+  props: ["active"],
+  data() {
     return {
-      img_banner:'banner_index_intro_top.jpg',
-      products: [
-        {
-          img: "1.jpg",
-          name: "Sofa giường",
-          price: "2990000",
-        },
-        {
-          img: "2.jpg",
-          name: "Kệ sách FreeStyle",
-          price: "6490000",
-        },
-
-        {
-          img: "3.jpg",
-          name: "Kệ TV Cobra",
-          price: "6490000",
-        },
-        {
-          img: "4.jpg",
-          name: "Kệ TV Kitka",
-          price: "5490000",
-        },
-      ],
+      link_view_product: "/View-product",
+      products: [],
     };
   },
   methods: {
+    ...mapMutations(["viewProduct"]),
+    ...mapGetters(['ProductsWorkroom']),
     formatPrice(value) {
       let val = (value / 1).toFixed().replace(".");
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     },
+    view(product) {
+      let Data = [product];
+      this.viewProduct(Data);
+    },
+    getProducts(){
+      var getPrd = this.ProductsWorkroom()
+      this.products = getPrd.products
+    }
   },
-}
-
+  created(){
+    this.getProducts()
+  }
+};
 </script>
 
 <style scoped>
@@ -160,7 +150,7 @@ h5::before {
 .product {
   text-align: center;
 }
-.product_new {
+.product {
   overflow: hidden;
   text-align: center;
 }

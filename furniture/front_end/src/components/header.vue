@@ -14,7 +14,7 @@
               >
               <div class="phone">
                 <b-icon class="icon-headphones" icon="headphones"></b-icon>
-                <a href="tel:0355322912"><strong>0355322912</strong></a>
+                <a href="tel:0355322912"><strong>19008888</strong></a>
               </div>
             </div>
             <div class="freeship col-5">
@@ -56,16 +56,20 @@
                     type="text"
                     class="input-search"
                     placeholder="Nhập từ khóa cần tìm..."
+                    v-model="keyword"
+                     @keydown="search()"
                   />
-                  <button class="search-button">
+                    <button class="search-button">
+                 <router-link to="/Search">
                     <b-icon class="icon-search" icon="search"> </b-icon>
+                 </router-link>
                   </button>
                 </div>
                 <div class="cart-mobile">
                   <router-link to="/Cart"
                    style="background:transparent;"
                     ><b-icon class="icon-cart" icon="cart-check-fill"> </b-icon
-                    ><strong class="cart_product_number"> 1 </strong></router-link
+                    ><strong class="cart_product_number"> {{qtt_product}} </strong></router-link
                   >
                 </div>
               </div>
@@ -80,9 +84,11 @@
                   <div class="signUp_signIn">
                     <strong>Tài khoản</strong>
                     <div class="log_or_reg">
-                      <router-link to="/Login">Đăng nhập</router-link>
+                      <router-link v-if="login == false" to="/Login">Đăng nhập</router-link>
+                      <div><router-link v-if="login == true" to="/Info-product-order">Thông tin</router-link></div>
                       <span>*</span>
-                      <router-link to="/Register">Đăng ký</router-link>
+                      <router-link v-if="login == false" to="/Register">Đăng ký</router-link>
+                      <div @click="logOut()"><a v-if="login == true" href="/">Đăng xuất</a></div>
                     </div>
                   </div>
                 </div>
@@ -94,7 +100,7 @@
                   <router-link to="/Cart" class="show_cart" style="background-color:transparent;">
                     <span class="in_cart">
                       <strong>Giỏ hàng</strong>
-                      <span><b>1</b> <span>Sản phẩm</span></span>
+                      <span><b>{{ qtt_product }}</b> <span>Sản phẩm</span></span>
                     </span>
                   </router-link>
                 </div>
@@ -212,10 +218,12 @@
                 v-if="show_login"
               >
                 <li class="list-mobile" @click="show = !show">
-                  <router-link to="/Login">Đăng nhập</router-link>
+                  <router-link v-if="login == false" to="/Login">Đăng nhập</router-link>
+                  <router-link v-if="login == true" to="/Info-product-order">Thông tin</router-link>
                 </li>
                 <li class="list-mobile" @click="show = !show">
-                  <router-link to="/register">Đăng ký</router-link>
+                  <router-link v-if="login == false" to="/Register">Đăng ký</router-link>
+                  <div @click="logOut()"><a v-if="login == true" href="/">Đăng xuất</a></div>
                 </li>
               </ul>
             </transition>
@@ -225,11 +233,19 @@
       <div class="list-menu-mobile" v-else style="left:-1000px;"></div>
       <Breadcrumbs :items="items">{{getRouter()}}</Breadcrumbs>
     </div>
+    {{quantity_in_cart()}}
+    {{check()}}
+      <transition name="fade">
       <router-view></router-view>
+  </transition>
+  <div class="scroll" @click="scroll_up()">
+    <i class="fas fa-chevron-up"></i>
+  </div>
   </div>
 </template>
 
 <script>
+import {mapGetters, mapMutations} from 'vuex'
 import Breadcrumbs from './breadcrumbs.vue';
 export default {
   components: {
@@ -241,16 +257,47 @@ export default {
       show_menu: true,
       show_login: false,
       items:[],
+      qtt_product:0,
+      login:false,
+      keyword:'',
     };
   },
   methods: {
+    ...mapGetters([
+      'cart',
+      'getter_check_login'
+    ]),
+    ...mapMutations([
+      'check_login',
+      'search_prd'
+    ]),
     getRouter(){
       this.items = this.$route.matched
       // console.log(this.$route);
+    },
+    quantity_in_cart(){
+      var products = this.cart()
+      var qtt = products.length
+      this.qtt_product = qtt
+    },
+    logOut(){
+      var login = false
+      localStorage.setItem('login', JSON.stringify(login));
+    },
+    check(){
+    this.login = this.getter_check_login()
+    },
+    search(){
+      var keyword = this.keyword
+      this.search_prd(keyword)
+      // console.log(this.keyword)
+    },
+    scroll_up(){
+      window.scrollTo(0,0);
     }
   },
   created() {
-    // this.getRouter();
+    
   },
 };
 </script>
@@ -261,7 +308,30 @@ export default {
   margin:0;
   box-sizing: border-box;
 }
-
+.scroll{
+  position: fixed;
+  top: 90%;
+  left: 90%;
+  width: 30px;
+  height: 30px;
+  background: #acacac;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: inherit;
+  cursor: pointer;
+  z-index: 111;
+}
+.scroll:hover i {
+  margin-top: -4px;
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .2s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: .3;
+}
 .container {
   max-width: 1140px;
 }
@@ -313,7 +383,7 @@ li {
 }
 .freeship {
   font-size: 15px;
-  text-align: center !important;
+  text-align: right !important;
 }
 .icon-truck {
   margin-left: 1px;
@@ -335,6 +405,7 @@ li {
   display: flex;
   border: 1px solid #ced4da;
   border-radius: 2px;
+  height: 30px;
 }
 .search .input-search {
   width: 90%;
@@ -347,8 +418,16 @@ li {
   outline: none;
   border: transparent;
   outline: none;
-  padding: 4px 10px;
+  /* padding: 4px 10px; */
   background: transparent;
+}
+.search-button a {
+  background: transparent;
+  color: #acacac;
+  padding: 5px 10px;
+}
+.search-button .router-link-exact-active:hover{
+  color: #acacac !important;
 }
 .login_cart {
   display: flex;
@@ -390,6 +469,7 @@ li {
   color: black;
 }
 .log_or_reg {
+  display: flex;
   line-height: 15px !important;
 }
 .log_or_reg a {
@@ -526,8 +606,8 @@ li {
     top: 0;
     display: block;
     transition: all 0.5s ease-in-out;
-    position: absolute;
-    z-index: 3;
+    position: fixed;
+    z-index: 234;
     background: white;
     width: 100%;
     height: 100vh;
@@ -568,14 +648,14 @@ li {
     border-right: 1px solid #acacac;
     border-radius: 2px;
     border-bottom: 1px solid #acacac;
-    background: #f3f3f3;
+    background: #ffffff;
   }
   .active-right {
     border-top: 1px solid #acacac;
     border-left: 1px solid #acacac;
     border-radius: 2px;
     border-bottom: 1px solid #acacac;
-    background: #f3f3f3;
+    background: #ffffff;
   }
   .active-tag {
     background: #f3f3f3;
@@ -604,10 +684,12 @@ li {
   .list-mobile {
     width: 100%;
     border-bottom: 1px solid #acacac;
-    background: #f3f3f3;
+    background: #ffff;
     z-index: 100;
+    text-align: left;
   }
   .list-mobile a {
+    text-transform: uppercase;
     color: rgba(0, 0, 0, 0.6);
     padding: 5px 10px;
     font-size: 17px;
@@ -615,10 +697,12 @@ li {
     display: inline-block;
     width: 100%;
   }
-  .list-mobile a:hover {
-    color: #ff9f00;
-    padding-left: 20px;
+  .list-mobile .router-link-exact-active {
+    color: black;
   }
+  /* .list-mobile a:hover {
+    color: #ff9f00;
+  } */
   .list-mobile:first-child {
     border-top: 1px solid #acacac;
   }

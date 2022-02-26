@@ -1,56 +1,57 @@
 <template>
   <div>
-       <div class="noName" v-for="(news,index) in news" :key="index">
-              <div class="img">
-                <a href=""> <img :src="require(`@/assets/images/news/${news.img}`)" alt=""> </a>
+      <div class="news" v-for="(nn,index) in news" :key="index">
+         <div class="list_news" v-for="(n,index) in nn" :key="index" @mousedown="view_news(n)">
+              <div class="img" >
+                <router-link :to="link_view"> <img :src="require(`@/${n.cover_image}`)" alt=""> </router-link>
               </div>
               <div class="title_datetime">
                 <div class="title">
-                <a href="">{{ news.title }}</a>
+                <router-link :to="link_view">{{ n.title_introduce }}</router-link>
               </div>
               <div class="datetime">
-                <span>{{ news.date_time }}</span>
+                <span>{{ n.date_time }}/{{n.year}}</span>
               </div>
               <div class="buttons-coll">
-                  <a href="" class="custom-btn view_now"
-                    ><span>Đọc thêm</span></a
+                  <router-link :to="link_view" class="custom-btn view_now"
+                    ><span>Đọc thêm</span></router-link
                   >
                 </div>
               </div>
             </div>
+      </div>
+      <!-- {{view_news()}} -->
   </div>
 </template>
 
 <script>
+import { mapGetters,mapMutations } from 'vuex'
 export default {
 data(){
     return{
       hidden:false,
-      news:[
-        {
-        img:'1.jpg',
-        title:'15 Xu Hướng Thiết Kế Nội Thất Mới Nhất',
-        date_time:'21 / 12 / 2019'
-        },
-        {
-        img:'2.jpg',
-        title:'Giải pháp thiết kế nội thất nhà ống hiện đại',
-        date_time:'21 / 12 / 2019'
-        },
-        {
-        img:'3.jpg',
-        title:'Trang trí không gian nội thất đẹp với chất liệu gỗ cao cấp',
-        date_time:'21 / 12 / 2019'
-        },
-        {
-        img:'4.jpg',
-        title:'SẢN PHẨM NỘI THẤT THÔNG MINH CHẤT LƯỢNG TẠI HÀ NỘI',
-        date_time:'21 / 12 / 2019'
-        },
-        
-      ],
+      link_view:'/View-news',
+      news:[],
     }
-  }
+  },
+  methods:{
+    ...mapGetters([
+      'dataNews',
+    ]),
+    ...mapMutations([
+      'to_viewNews',
+    ]),
+    getNews(){
+      this.news = this.dataNews()
+    },
+    view_news(n){
+      this.to_viewNews([n])
+    }
+  },
+    created(){
+      this.getNews()
+      // console.log(this.news.news[0].id)
+    }
 }
 </script>
 
@@ -64,14 +65,13 @@ li{
 .container{
   max-width: 1140px;
 }
-.news .noName{
-  height: 222px;
+.news .list_news{
   padding-bottom: 20px;
   margin: 0 0 20px;
   border-bottom: 1px dashed #ebebeb;
   display: flex;
 }
-.news .noName:last-child{
+.news .list_news:last-child{
   border-bottom: none;
 
 }
@@ -193,7 +193,7 @@ li{
   margin: 20px 0px;
 }
 @media only screen and (max-width: 500px) {
- .noName{
+ .list_news{
    height: auto !important;
    display: inline !important;
  }

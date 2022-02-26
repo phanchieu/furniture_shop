@@ -52,10 +52,10 @@
                     <li class="list">
                       <router-link to="/">Trang chủ</router-link>
                     </li>
-                    <li class="list"><a href="#">Giới thiệu</a></li>
-                    <li class="list"><a href="#">Sản phẩm</a></li>
-                    <li class="list"><a href="#">Tin tức</a></li>
-                    <li class="list"><a href="#">Liên hệ</a></li>
+                    <li class="list"><router-link to="#">Giới thiệu</router-link></li>
+                    <li class="list"><router-link to="">Sản phẩm</router-link></li>
+                    <li class="list"><router-link to="/News">Tin tức</router-link></li>
+                    <li class="list"><router-link to="/Contact">Liên hệ</router-link></li>
                   </ul>
                 </div>
                 <div class="social-network col-7 col-md-7 col-lg-6">

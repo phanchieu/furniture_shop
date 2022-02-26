@@ -1,21 +1,25 @@
 <template>
   <div class="container" v-if="active == 1">
     <div class="res1">
-      <carousel :autoplay="true" :nav="false" :dots="false"  :responsive="{0:{items:2},600:{items:4},1000:{items:6}}">
+      <carousel
+        :autoplay="true"
+        :nav="false"
+        :dots="false"
+        :responsive="{ 0: { items: 2 }, 600: { items: 4 }, 1000: { items: 6 } }"
+      >
         <div
           class="product_new"
           v-for="(product, index) in products"
           :key="index"
+          @mousedown="view(product)"
         >
-          <a href="" class="img">
+          <router-link :to="link_view_product" class="img">
             <img
-              :src="
-                require(`@/assets/images/image_home/featured_products/${product.img}`)
-              "
+              :src="require(`@/${product.img}`)"
               alt=""
               class="img_product"
             />
-          </a>
+          </router-link>
           <div class="product_info">
             <div class="vote">
               <i class="fas fa-star"></i>
@@ -25,13 +29,17 @@
               <i class="fas fa-star"></i>
             </div>
             <h6 class="product_name">
-              <a href="">{{ product.name }}</a>
+              <router-link :to="link_view_product">{{
+                product.name
+              }}</router-link>
             </h6>
             <div class="price">
               {{ formatPrice(product.price) }}<span>đ</span>
             </div>
             <div class="buttons-coll">
-              <a href="" class="custom-btn view_now"><span>Xem ngay</span></a>
+              <router-link :to="link_view_product" class="custom-btn view_now"
+                ><span>Xem ngay</span></router-link
+              >
             </div>
           </div>
         </div>
@@ -40,72 +48,136 @@
   </div>
 </template>
 
-
 <script>
-
-import carousel from 'vue-owl-carousel'
+import carousel from "vue-owl-carousel";
+import { mapMutations } from "vuex";
 
 export default {
-    components: { carousel },
-    props:['active'],
-      data() {
+  components: { carousel },
+  props: ["active"],
+  data() {
     return {
+      link_view_product: "/View-product",
       products: [
         {
-          img: "1.jpg",
+          img: "assets/images/room/living_room/1.jpg",
+          view_img_product: [
+            "assets/images/room/living_room/img_view_prd/1-1.jpg",
+            "assets/images/room/living_room/img_view_prd/1-2.jpg",
+            "assets/images/room/living_room/img_view_prd/1-3.jpg",
+          ],
           name: "Tủ TV FreeStyle",
-          price: "6990000",
+          price: 6990000,
+          quantity: 1,
+          colors: ["Trắng"],
+          sizes: ["Vừa", "Nhỏ"],
+          category: "Phòng khách",
+          materials: ["Gỗ"],
         },
         {
-          img: "2.jpg",
+          img: "assets/images/room/dining_room/1.jpg",
+          view_img_product: [
+            "assets/images/room/dining_room/img_view_prd/1-1.jpg",
+            "assets/images/room/dining_room/img_view_prd/1-2.jpg",
+            "assets/images/room/dining_room/img_view_prd/1-3.jpg",
+          ],
           name: "Bộ bàn ăn Stefano",
-          price: "14950000",
+          price: 14950000,
+          quantity: 1,
+          colors: ["Xám", "Vàng"],
+          sizes: ["Lớn", "Vừa"],
+          category: "Phòng ăn",
+          materials: ["Gỗ - Bọc Vải"],
         },
-
         {
-          img: "3.jpg",
+          img: "assets/images/room/dining_room/3.jpg",
+          view_img_product: [
+            "assets/images/room/dining_room/img_view_prd/3-1.jpg",
+            "assets/images/room/dining_room/img_view_prd/3-2.jpg",
+          ],
           name: "Bộ bàn ăn Edward",
-          price: "3990000",
+          price: 1290000,
+          quantity: 1,
+          colors: ["Vàng", "Nâu đen"],
+          sizes: ["Vừa", "Nhỏ"],
+          category: "Phòng ăn",
+          materials: ["Gỗ"],
         },
         {
-          img: "4.jpg",
-          name: "Kệ TV Batista",
-          price: "5990000",
+          img: "assets/images/room/dining_room/2.jpg",
+          view_img_product: [
+            "assets/images/room/dining_room/img_view_prd/2-1.jpg",
+            "assets/images/room/dining_room/img_view_prd/2-2.jpg",
+          ],
+          name: "Bộ bàn ăn Marryland",
+          price: 3990000,
+          quantity: 1,
+          colors: ["Vàng"],
+          sizes: ["Lớn", "Nhỏ"],
+          category: "Phòng ăn",
+          materials: ["Gỗ"],
         },
         {
-          img: "5.jpg",
+          img: "assets/images/room/living_room/9.jpg",
+          view_img_product: [
+            "assets/images/room/living_room/img_view_prd/9-1.jpg",
+          ],
           name: "Bàn cafe Cabaret",
-          price: "1390000",
+          price: 1390000,
+          quantity: 1,
+          colors: ["Đen"],
+          sizes: ["Vừa", "Nhỏ"],
+          category: "Phòng khách",
+          materials: ["Gỗ"],
         },
         {
-          img: "6.jpg",
+          img: "assets/images/room/living_room/10.jpg",
+          view_img_product: [
+            "assets/images/room/living_room/img_view_prd/10-1.jpg",
+            "assets/images/room/living_room/img_view_prd/10-2.jpg",
+            "assets/images/room/living_room/img_view_prd/10-3.jpg",
+          ],
           name: "Ghế bành Bogart",
-          price: "5490000",
+          price: 5490000,
+          quantity: 1,
+          colors: ["Hồng tím", "Xanh", "Ghi"],
+          sizes: ["Lớn", "Vừa"],
+          category: "Phòng khách",
+          materials: ["Gỗ - Bọc Vải"],
         },
         {
-          img: "7.jpg",
+          img: "assets/images/room/living_room/11.jpg",
+          view_img_product: [
+            "assets/images/room/living_room/img_view_prd/11-1.jpg",
+            "assets/images/room/living_room/img_view_prd/11-2.jpg",
+            "assets/images/room/living_room/img_view_prd/11-3.jpg",
+          ],
           name: "Ghế bành Connemara",
-          price: "7490000",
+          price: 7490000,
+          quantity: 1,
+          colors: ["Xám", "Xanh"],
+          sizes: ["Lớn", "Nhỏ"],
+          category: "Phòng khách",
+          materials: ["Gỗ - Bọc Vải"],
         },
       ],
     };
   },
   methods: {
+    ...mapMutations(["viewProduct"]),
     formatPrice(value) {
       let val = (value / 1).toFixed().replace(".");
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     },
+    view(product) {
+      let Data = [product];
+      this.viewProduct(Data);
+    },
   },
-}
-
+};
 </script>
 
 <style scoped>
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
 .container {
   max-width: 1140px;
   margin: 0 auto !important;
@@ -286,5 +358,4 @@ h5::before {
 .view_now span:hover:after {
   width: 100%;
 }
-
 </style>
